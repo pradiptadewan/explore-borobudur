@@ -6,7 +6,10 @@ import { JSX } from "react";
 import { packages, categories, TourPackage, Category, siteConfig } from "@/lib/data";
 import PackageCard from "@/components/PackageCard";
 
-// 1. UBAH INTERFACE MENJADI PROMISE
+import DestinationHighlights from "@/components/vw/DestinationHighlights";
+import EducationInsight from "@/components/vw/EducationInsight";
+
+
 interface PageProps {
   params: Promise<{ category: string }>;
 }
@@ -183,6 +186,13 @@ export default async function CategoryPage(props: PageProps) {
           </div>
         </div>
       </section>
+
+      {params.category === "vw" && (
+        <>
+          <DestinationHighlights />
+          <EducationInsight />
+        </>
+      )}
 
       <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 bg-[#DaddD6]">
         <div className="container mx-auto text-center">

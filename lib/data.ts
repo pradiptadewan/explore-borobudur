@@ -47,3 +47,95 @@ export const packages: Record<string, TourPackage[]> = {
      { id: "rafting-1", name: "Rafting Elo", price: 750000, duration: "2.5 Jam", pax: 6, desc: "Arung jeram sungai Elo grade 2-3, aman untuk pemula.", category: "rafting" },
   ],
 };
+
+export const vwDestinations = [
+  {
+    title: "Candi Borobudur",
+    subtitle: "Candi Buddha Terbesar",
+    image: "/images/dest-edu/d1.jpg",
+  },
+  {
+    title: "Svarga Bumi",
+    subtitle: "Keindahan Persawahan",
+    image: "/images/dest-edu/svarga.jpg",
+  },
+  {
+    title: "Bukit Rhema",
+    subtitle: "Gereja Ayam",
+    image: "/images/dest-edu/rhema.jpg",
+  },
+  {
+    title: "Lap. Tuksongo",
+    subtitle: "Lapangan Desa",
+    image: "/images/dest-edu/lapT.jpg",
+  },
+  {
+    title: "Mandala",
+    subtitle: "Keindahan Sawah",
+    image: "/images/dest-edu/mandala.jpg",
+  },
+  {
+    title: "Mandala",
+    subtitle: "Keindahan Sawah",
+    image: "/images/dest-edu/mandala.jpg",
+  },
+  {
+    title: "Mandala",
+    subtitle: "Keindahan Sawah",
+    image: "/images/dest-edu/mandala.jpg",
+  },
+  {
+    title: "Mandala",
+    subtitle: "Keindahan Sawah",
+    image: "/images/dest-edu/mandala.jpg",
+  },
+];
+
+
+export const vwEducations = [
+  {
+    title: "Budidaya Lebah Madu",
+    subtitle: "Teknik ternak penghasil madu",
+    image: "/images/dest-edu/madu.jpg",
+  },
+  {
+    title: "Budidaya Jamur",
+    subtitle: "Teknik pembuatan jamur",
+    image: "/images/dest-edu/jamur.jpg",
+  },
+  {
+    title: "Perah Susu Kambing Etawa",
+    subtitle: "Proses pemerahan susu",
+    image: "/images/dest-edu/susuperah.jpg",
+  },
+   {
+    title: "Budidaya Lebah Madu",
+    subtitle: "Teknik ternak penghasil madu",
+    image: "/images/dest-edu/madu.jpg",
+  },
+  {
+    title: "Budidaya Jamur",
+    subtitle: "Teknik pembuatan jamur",
+    image: "/images/dest-edu/jamur.jpg",
+  },
+  {
+    title: "Perah Susu Kambing Etawa",
+    subtitle: "Proses pemerahan susu",
+    image: "/images/dest-edu/susuperah.jpg",
+  },
+   {
+    title: "Budidaya Lebah Madu",
+    subtitle: "Teknik ternak penghasil madu",
+    image: "/images/dest-edu/madu.jpg",
+  },
+  {
+    title: "Budidaya Jamur",
+    subtitle: "Teknik pembuatan jamur",
+    image: "/images/dest-edu/jamur.jpg",
+  },
+  {
+    title: "Perah Susu Kambing Etawa",
+    subtitle: "Proses pemerahan susu",
+    image: "/images/dest-edu/susuperah.jpg",
+  },
+];
