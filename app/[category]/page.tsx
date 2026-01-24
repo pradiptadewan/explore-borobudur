@@ -3,17 +3,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Camera, Mountain, Zap, Droplets } from "lucide-react";
 import { JSX } from "react";
+// Pastikan path import ini benar sesuai struktur folder Anda
 import { packages, categories, TourPackage, Category, siteConfig } from "@/lib/data";
 import PackageCard from "@/components/PackageCard";
 
 import DestinationHighlights from "@/components/vw/DestinationHighlights";
 import EducationInsight from "@/components/vw/EducationInsight";
 
-
 interface PageProps {
   params: Promise<{ category: string }>;
 }
 
+// Konfigurasi Detail Header Kategori
 const categoryDetails: Record<string, {
   title: string;
   subtitle: string;
@@ -31,8 +32,9 @@ const categoryDetails: Record<string, {
     icon: <Camera className="w-8 h-8 text-[#E8ECE9]" />,
     color: "bg-[#4A5D44]",
     details: [
-      "Spot Foto Balkondes & Sawah",
-      "Edukasi Home Industri",
+      "Spot Foto Alami dan Persawahan",
+      "Destinasi Wisata",
+      "Edukasi UMKM Industri",
       "Driver Ramah & Berpengalaman",
     ],
   },
@@ -50,16 +52,16 @@ const categoryDetails: Record<string, {
     ],
   },
   atv: {
-    title: "ATV Jungle Trek",
-    subtitle: "JELAJAH ALAM",
-    description: "Jelajahi sisi liar Borobudur. Kendalikan ATV Anda melewati hutan pinus yang rimbun dan jalur tanah yang seru. Aktivitas fisik yang menyenangkan di tengah udara segar pegunungan.",
+    title: "ATV Jungle Adventure",
+    subtitle: "KEBEBASAN HAKIKI",
+    description: "Alam yang memukau, sawah hijau tak berujung, candi eksotis, dan keramahtamahan warga menjadikan tempat ini rumah bagi jiwa petualang. Taklukkan rute menantang di kaki bukit Menoreh.",
     image: "/images/atv-main.png",
     icon: <Zap className="w-8 h-8 text-[#E8ECE9]" />,
     color: "bg-[#584B3F]",
     details: [
-      "Pemandu Profesional",
-      "Perlengkapan Keamanan",
-      "Dokumentasi Video Aksi",
+      "Pemandu Profesional & Helm/Boots",
+      "Dokumentasi Foto & Video",
+      "P3K & Retribusi Desa",
     ],
   },
   rafting: {
@@ -77,9 +79,8 @@ const categoryDetails: Record<string, {
   },
 };
 
-// 2. TAMBAHKAN AWAIT DI METADATA
 export async function generateMetadata(props: PageProps) {
-  const params = await props.params; // Await disini
+  const params = await props.params;
   const cat = categories.find((c: Category) => c.id === params.category);
   const detail = cat ? categoryDetails[params.category] : null;
   return {
@@ -88,10 +89,10 @@ export async function generateMetadata(props: PageProps) {
   };
 }
 
-// 3. UBAH COMPONENT JADI ASYNC DAN AWAIT PARAMS
 export default async function CategoryPage(props: PageProps) {
-  const params = await props.params; // Await disini
+  const params = await props.params;
 
+  // Mengambil data langsung dari lib/data.ts
   const categoryPackages = packages[params.category];
   const categoryInfo = categories.find((c: Category) => c.id === params.category);
   const detail = categoryDetails[params.category];
@@ -100,6 +101,7 @@ export default async function CategoryPage(props: PageProps) {
 
   return (
     <main className="bg-[#E5E7E1] min-h-screen text-[#2F3E2E] font-sans overflow-x-hidden">
+      {/* HERO SECTION */}
       <section className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] w-full overflow-hidden">
         <div className="absolute inset-0">
           <Image
@@ -116,13 +118,13 @@ export default async function CategoryPage(props: PageProps) {
         </div>
 
         <div className="relative z-10 container mx-auto px-4 sm:px-6 md:px-20 h-full flex flex-col justify-end pb-8 sm:pb-12 md:pb-16">
-          <Link
+          {/* <Link
             href="/"
             className="inline-flex items-center gap-2 text-[#E5E7E1] hover:text-white mb-6 sm:mb-8 transition-colors group w-fit"
           >
             <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
             <span className="text-sm sm:text-base font-semibold tracking-wide">Kembali</span>
-          </Link>
+          </Link> */}
 
           <div className="flex items-center gap-3 sm:gap-4 mb-4">
             <div className={`p-3 sm:p-4 rounded-full ${detail.color} shadow-lg text-white ring-2 sm:ring-4 ring-[#E5E7E1]/50`}>
@@ -143,8 +145,10 @@ export default async function CategoryPage(props: PageProps) {
         </div>
       </section>
 
+      {/* CONTENT SECTION */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-[#E5E7E1]">
         <div className="container mx-auto">
+          {/* Facility List */}
           <div className="mb-12 sm:mb-16">
             <div className="flex items-center gap-3 mb-4">
               <div className="h-0.75 w-12 bg-linear-to-r from-[#4A5D44] to-[#A3B18A] rounded-full"></div>
@@ -167,6 +171,7 @@ export default async function CategoryPage(props: PageProps) {
             </div>
           </div>
 
+          {/* Package List */}
           <div className="mb-8 sm:mb-12">
             <div className="flex items-center gap-3 mb-6 sm:mb-8">
               <div className="h-0.75 w-12 bg-linear-to-r from-[#4A5D44] to-[#A3B18A] rounded-full"></div>
@@ -175,7 +180,10 @@ export default async function CategoryPage(props: PageProps) {
               </h2>
             </div>
             <p className="text-[#586356] text-sm sm:text-base mb-8 sm:mb-12 max-w-2xl font-light">
-              Pilih paket yang sesuai dengan kebutuhan dan budget Anda. Semua paket sudah termasuk driver, BBM, dan dokumentasi.
+              Pilih paket yang sesuai dengan kebutuhan dan budget Anda.
+              {params.category === 'atv' 
+                ? " Harga Single untuk 1 orang/ATV dan Double untuk 2 orang (boncengan)." 
+                : " Semua paket sudah termasuk armada, driver, dan BBM."}
             </p>
           </div>
 
@@ -187,6 +195,7 @@ export default async function CategoryPage(props: PageProps) {
         </div>
       </section>
 
+      {/* VW Specific Components */}
       {params.category === "vw" && (
         <>
           <DestinationHighlights />
@@ -194,6 +203,7 @@ export default async function CategoryPage(props: PageProps) {
         </>
       )}
 
+      {/* Footer CTA */}
       <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 bg-[#DaddD6]">
         <div className="container mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-[#2F3E2E] mb-4 sm:mb-6">

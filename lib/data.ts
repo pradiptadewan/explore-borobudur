@@ -4,10 +4,13 @@ export interface TourPackage {
   id: string;
   name: string;
   price: number;
+  priceDouble?: number; // Opsional: harga boncengan (khusus ATV)
   duration: string;
   pax: number;
   desc: string;
   category: string;
+  features?: string[]; // Opsional: detail poin rute
+  image: string; // WAJIB: Agar setiap card punya foto beda
 }
 
 export interface Category {
@@ -19,32 +22,141 @@ export interface Category {
 export const siteConfig = {
   name: "Borobudur Adventure",
   description: "Sewa VW, Jeep, ATV, dan Rafting terbaik di Borobudur.",
-  whatsappNumber: "628123456789",
+  whatsappNumber: "6285801262682",
 };
 
-// DATA DENGAN LINK GAMBAR BARU (ACTIVE)
 export const categories: Category[] = [
-  { id: "vw", name: "VW Safari", image: "https://images.unsplash.com/photo-1580228833446-5606f227b61f?q=80&w=800&auto=format&fit=crop" },
-  { id: "jeep", name: "Jeep Adventure", image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&auto=format&fit=crop" },
-  { id: "atv", name: "ATV Ride", image: "https://images.unsplash.com/photo-1551816230-ef5deaed4a26?q=80&w=800&auto=format&fit=crop" },
-  { id: "rafting", name: "Rafting Elo", image: "https://images.unsplash.com/photo-1530866495561-507c9faab2ed?q=80&w=800&auto=format&fit=crop" },
+  { id: "vw", name: "VW Safari", image: "/images/vw-main.png" },
+  { id: "jeep", name: "Jeep Adventure", image: "/images/jeep-main.png" },
+  { id: "atv", name: "ATV Ride", image: "/images/atv-main.png" },
+  { id: "rafting", name: "Rafting Elo", image: "/images/rafting-main.png" },
 ];
 
 export const packages: Record<string, TourPackage[]> = {
   vw: [
-    { id: "vw-1", name: "Short Time", price: 400000, duration: "2 Jam", pax: 4, desc: "Keliling desa wisata sekitar Borobudur, spot foto sawah.", category: "vw" },
-    { id: "vw-2", name: "Medium Trip", price: 500000, duration: "3 Jam", pax: 4, desc: "Kunjungan ke home industri (madu/rengginang) + spot foto.", category: "vw" },
-    { id: "vw-3", name: "Sunrise Trip", price: 650000, duration: "3 Jam", pax: 4, desc: "Menikmati sunrise Punthuk Setumbu + keliling desa.", category: "vw" },
-    { id: "vw-4", name: "Long Trip", price: 700000, duration: "4 Jam", pax: 4, desc: "Paket lengkap eksplorasi desa wisata dan edukasi.", category: "vw" },
+    { 
+      id: "vw-1", 
+      name: "Short Time", 
+      price: 400000, 
+      duration: "2 Jam", 
+      pax: 4, 
+      desc: "Paket hemat berkeliling desa wisata Borobudur dengan VW Classic.", 
+      category: "vw",
+      image: "/images/vw1.png",
+      features: ["1 Unit VW Safari", "2 Kunjungan Edukasi", "1 Kunjungan Destinasi", "Spot Foto Menarik"]
+    },
+    { 
+      id: "vw-2", 
+      name: "Medium Trip", 
+      price: 500000, 
+      duration: "3 Jam", 
+      pax: 4, 
+      desc: "Puas berkeliling desa dan mengunjungi berbagai sentra kerajinan lokal.", 
+      category: "vw",
+      image: "/images/vw2.png",
+      features: ["1 Unit VW Safari", "3 Kunjungan Edukasi", "1 Kunjungan Destinasi", "Spot Foto Menarik"]
+    },
+    { 
+      id: "vw-3", 
+      name: "Sunrise Trip", 
+      price: 650000, 
+      duration: "3 Jam", 
+      pax: 4, 
+      desc: "Mengejar matahari terbit dengan latar belakang Candi Borobudur.", 
+      category: "vw",
+      image: "/images/vw4.png",
+      features: ["1 Unit VW Safari", "1 Spot Sunrise (Punthuk)", "2 Kunjungan Destinasi", "Spot Foto Menarik"]
+    },
+    { 
+      id: "vw-4", 
+      name: "Long Trip", 
+      price: 700000, 
+      duration: "4 Jam", 
+      pax: 4, 
+      desc: "Eksplorasi total Borobudur dari edukasi hingga destinasi alam.", 
+      category: "vw",
+      image: "/images/vw3.png",
+      features: ["1 Unit VW Safari", "Kunjungan Edukasi Lengkap", "Kunjungan Destinasi Alam", "Spot Foto Menarik"]
+    },
   ],
   jeep: [
-     { id: "jeep-1", name: "Short Jeep", price: 450000, duration: "2 Jam", pax: 4, desc: "Menjelajah rute menantang di kaki bukit Menoreh.", category: "jeep" },
+     { 
+       id: "jeep-1", 
+       name: "Short Jeep", 
+       price: 450000, 
+       duration: "2 Jam", 
+       pax: 4, 
+       desc: "Menjelajah rute menantang di kaki bukit Menoreh.", 
+       category: "jeep",
+       image: "/images/jeep1.png",
+       features: ["Jeep Offroad", "Driver Profesional", "Rute Sungai & Hutan", "Safety Gear"]
+     },
   ],
   atv: [
-     { id: "atv-1", name: "ATV Fun", price: 300000, duration: "1 Jam", pax: 1, desc: "Seru-seruan main lumpur dengan ATV matic.", category: "atv" },
+    { 
+      id: "atv-fast", 
+      name: "Fast Track Package", 
+      price: 350000, 
+      priceDouble: 400000, 
+      duration: "1 Jam Trip", 
+      pax: 1, 
+      desc: "Explore unpredictable tracks of the Sileng River. Conquer the great obstacles and challenges!", 
+      category: "atv",
+      image: "/images/atv1.png",
+      features: [
+        "Tour de Borobudur: Village & Paddy Field",
+        "Menoreh View",
+        "Explore Sileng River",
+        "Inclusions: Guide, Photo/Video, First Aid"
+      ]
+    },
+    { 
+      id: "atv-family", 
+      name: "Family Package", 
+      price: 300000, 
+      priceDouble: 350000,
+      duration: "2 Jam Trip", 
+      pax: 1, 
+      desc: "Bring your family to explore the Borobudur area, enjoy greenery nature of Menoreh Hills.", 
+      category: "atv",
+      image: "/images/atv2.png",
+      features: [
+        "Tour de Borobudur: Village & Paddy Field",
+        "Stop by 2 Home Industries",
+        "Menoreh View",
+        "Inclusions: Guide, Photo/Video, First Aid"
+      ]
+    },
+    { 
+      id: "atv-adventure", 
+      name: "Adventure Package", 
+      price: 400000, 
+      priceDouble: 500000,
+      duration: "3 Jam Trip", 
+      pax: 1, 
+      desc: "Get your adrenaline pumping while riding your ATV. Enjoy the thrill of an awe-inspiring exploration!", 
+      category: "atv",
+      image: "/images/atv3.png",
+      features: [
+        "Tour de Borobudur: Village & Paddy Field",
+        "Stop by 2 Home Industries",
+        "Explore Sileng River",
+        "Inclusions: Guide, Photo/Video, First Aid"
+      ]
+    },
   ],
   rafting: [
-     { id: "rafting-1", name: "Rafting Elo", price: 750000, duration: "2.5 Jam", pax: 6, desc: "Arung jeram sungai Elo grade 2-3, aman untuk pemula.", category: "rafting" },
+     { 
+       id: "rafting-1", 
+       name: "Rafting Elo", 
+       price: 750000, 
+       duration: "2.5 Jam", 
+       pax: 6, 
+       desc: "Arung jeram sungai Elo grade 2-3, aman untuk pemula.", 
+       category: "rafting",
+       image: "/images/rafting1.png",
+       features: ["Perahu Karet & Guide", "Makan Siang", "Kelapa Muda", "Dokumentasi & Asuransi"]
+     },
   ],
 };
 
@@ -66,7 +178,7 @@ export const vwDestinations = [
   },
   {
     title: "Lap. Tuksongo",
-    subtitle: "Lapangan Desa",
+    subtitle: "Lapangan Dengan View Menoreh",
     image: "/images/dest-edu/lapT.jpg",
   },
   {
@@ -75,19 +187,19 @@ export const vwDestinations = [
     image: "/images/dest-edu/mandala.jpg",
   },
   {
-    title: "Mandala",
-    subtitle: "Keindahan Sawah",
-    image: "/images/dest-edu/mandala.jpg",
+    title: "Watu Putih",
+    subtitle: "Spot Foto Batu Putih",
+    image: "/images/dest-edu/watup.jpg",
   },
   {
-    title: "Mandala",
-    subtitle: "Keindahan Sawah",
-    image: "/images/dest-edu/mandala.jpg",
+    title: "Taman Kelinci",
+    subtitle: "Bermain dan memberi makan kelinci",
+    image: "/images/dest-edu/tamank.jpg",
   },
   {
-    title: "Mandala",
-    subtitle: "Keindahan Sawah",
-    image: "/images/dest-edu/mandala.jpg",
+    title: "Junkyard",
+    subtitle: "Spot Foto Ikonik",
+    image: "/images/dest-edu/junky.jpg",
   },
 ];
 
@@ -109,33 +221,33 @@ export const vwEducations = [
     image: "/images/dest-edu/susuperah.jpg",
   },
    {
-    title: "Budidaya Lebah Madu",
-    subtitle: "Teknik ternak penghasil madu",
-    image: "/images/dest-edu/madu.jpg",
+    title: "Edukasi Gula Jawa",
+    subtitle: "Pembuatan gula tradisional",
+    image: "/images/dest-edu/gulajawa.jpg",
   },
   {
-    title: "Budidaya Jamur",
-    subtitle: "Teknik pembuatan jamur",
-    image: "/images/dest-edu/jamur.jpg",
+    title: "Edukasi Pati Aren",
+    subtitle: "Teknik pengolahan pati alami",
+    image: "/images/dest-edu/pati.jpg",
   },
   {
-    title: "Perah Susu Kambing Etawa",
-    subtitle: "Proses pemerahan susu",
-    image: "/images/dest-edu/susuperah.jpg",
+    title: "Edukasi Rengginang",
+    subtitle: "Proses pembuatan camilan tradisional",
+    image: "/images/dest-edu/rengginang.jpg",
   },
    {
-    title: "Budidaya Lebah Madu",
-    subtitle: "Teknik ternak penghasil madu",
-    image: "/images/dest-edu/madu.jpg",
+    title: "Edukasi Tahu",
+    subtitle: "Proses pembuatan tahu tradisional",
+    image: "/images/dest-edu/tahu.jpg",
   },
   {
-    title: "Budidaya Jamur",
-    subtitle: "Teknik pembuatan jamur",
-    image: "/images/dest-edu/jamur.jpg",
+    title: "Edukasi Gerabah",
+    subtitle: "Kerajinan tanah liat",
+    image: "/images/dest-edu/gerabah.jpg",
   },
   {
-    title: "Perah Susu Kambing Etawa",
-    subtitle: "Proses pemerahan susu",
-    image: "/images/dest-edu/susuperah.jpg",
+    title: "Membatik",
+    subtitle: "Seni membatik tradisional",
+    image: "/images/dest-edu/batik.jpg",
   },
 ];

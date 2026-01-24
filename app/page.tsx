@@ -30,65 +30,69 @@ const featuresData: FeatureData[] = [
   {
     id: "vw",
     title: "Classic VW Safari",
-    subtitle: "KENANGAN ABADI",
+    subtitle: "ROMANSA PEDESAAN",
     description:
-      "Nikmati semilir angin pagi pedesaan Borobudur. Perjalanan santai menyusuri lorong waktu dengan mobil klasik, melewati persawahan hijau yang menyejukkan mata dan menyapa keramahtamahan warga lokal.",
+      "Rasakan nostalgia tak lekang waktu di atas kap terbuka. Menyusuri jalanan desa berlatar Bukit Menoreh, singgah di sentra kerajinan warga, dan abadikan momen estetik di tengah hamparan sawah hijau yang memukau.",
     image: "/images/vw-main.png",
-    stats: ["Santai", "Ramah Keluarga", "Instagramable"],
+    stats: ["Vintage", "Edu-Wisata", "Fotogenik"],
     icon: <Camera className="w-6 h-6 text-[#E8ECE9]" />,
     color: "bg-[#4A5D44]",
     details: [
-      "Spot Foto Balkondes & Sawah",
-      "Edukasi Home Industri",
-      "Driver Ramah & Berpengalaman",
+      "Trip Desa Wisata & UMKM",
+      "Pilihan Spot Foto Menark",
+      "Driver Sebagai Guide",
+      "Unit Klasik Terawat",
     ],
   },
   {
     id: "jeep",
     title: "Jeep Sunrise Explore",
-    subtitle: "PESONA PAGI",
+    subtitle: "PENAKLUK FAJAR",
     description:
-      "Saksikan matahari terbit dari spot terbaik di Menoreh. Rasakan sejuknya kabut pagi dan pacu adrenalin Anda menembus jalur sungai yang menyegarkan. Kombinasi sempurna antara ketenangan dan tantangan.",
+      "Berburu matahari terbit dari Punthuk Setumbu yang legendaris, lalu pacu adrenalin Anda membelah aliran sungai. Perpaduan sempurna antara keindahan magis pagi hari dan tantangan offroad yang memacu jantung.",
     image: "/images/jeep-main.png",
-    stats: ["Petualangan", "Sunrise", "Trek Sungai"],
+    stats: ["Adrenalin", "Golden Sunrise", "Basah Seru"],
     icon: <Mountain className="w-6 h-6 text-[#E8ECE9]" />,
     color: "bg-[#6B705C]",
     details: [
       "Sunrise Punthuk Setumbu",
-      "Offroad Sungai & Hutan",
-      "Coffee Break di Alam Terbuka",
+      "Trek Sungai & Lumpur",
+      "Safety Gear Lengkap",
+      "Driver Profesional",
     ],
   },
   {
     id: "atv",
-    title: "ATV Jungle Trek",
-    subtitle: "JELAJAH ALAM",
+    title: "ATV Jungle Adventure",
+    subtitle: "KENDALI PENUH",
     description:
-      "Jelajahi sisi liar Borobudur. Kendalikan ATV Anda melewati hutan pinus yang rimbun dan jalur tanah yang seru. Aktivitas fisik yang menyenangkan di tengah udara segar pegunungan.",
+      "Ambil kendali dan taklukkan medan menantang di kaki bukit. Melibas jalur tanah, menerobos hutan pinus, hingga manuver di kubangan air. Sebuah terapi alam bagi Anda yang merindukan kebebasan tanpa batas.",
     image: "/images/atv-main.png",
-    stats: ["Sporty", "Hutan Pinus", "Memacu Adrenalin"],
+    stats: ["Extreme", "Hutan Pinus", "Lumpur"],
     icon: <Zap className="w-6 h-6 text-[#E8ECE9]" />,
     color: "bg-[#584B3F]",
     details: [
-      "Pemandu Profesional",
-      "Perlengkapan Keamanan",
-      "Dokumentasi Video Aksi",
+      "Trek Hutan & Sungai",
+      "Pemandu Berpengalaman",
+      "Briefing Keamanan",
+      "Boots & Helm",
     ],
   },
   {
     id: "rafting",
     title: "Elo River Rafting",
-    subtitle: "KESEGARAN AIR",
+    subtitle: "ARUS KEBERSAMAAN",
     description:
-      "Segarkan pikiran dengan jernihnya air Sungai Elo. Arung jeram grade pemula yang aman namun tetap seru. Tertawa lepas bersama sahabat sambil menikmati relief alam bebatuan sungai yang eksotis.",
+      "Arungi jeram Sungai Elo sepanjang 12.5 KM yang legendaris. Grade II-III yang aman untuk keluarga namun tetap menantang. Nikmati kesegaran air pegunungan dan kelapa muda di titik istirahat.",
     image: "/images/rafting-main.png",
-    stats: ["Olahraga Air", "Kekompakan", "Menyegarkan"],
+    stats: ["Team Work", "Grade II-III", "Durasi 2.5 Jam"],
     icon: <Droplets className="w-6 h-6 text-[#E8ECE9]" />,
     color: "bg-[#5F6F65]",
     details: [
       "Termasuk Makan Siang",
-      "Asuransi & Tim Penyelamat",
-      "Fasilitas Bilas Bersih",
+      "Asuransi & Rescue Team",
+      "Transport Lokal",
+      "Snack Kelapa Muda",
     ],
   },
 ];
@@ -285,7 +289,7 @@ export default function Home() {
               Eksplorasi
             </Link>
             <Link
-              href="https://wa.me/628123456789"
+              href="https://wa.me/6285801262682"
               className="px-8 sm:px-10 py-3.5 sm:py-4 bg-[#4A5D44] text-white font-bold rounded-full hover:bg-[#3A4A35] focus:bg-[#3A4A35] focus:outline-none focus:ring-2 focus:ring-[#4A5D44] focus:ring-offset-2 transition-all flex items-center justify-center uppercase tracking-[0.15em] text-xs shadow-xl hover:shadow-[#A3B18A]/30 hover:scale-105 active:scale-100 duration-300 min-h-11"
             >
               Reservasi
@@ -370,10 +374,10 @@ export default function Home() {
                 className="mt-8 sm:mt-10"
               >
                 <Link
-                  href="#vw"
+                  href="gallery"
                   className="inline-flex items-center gap-3 px-6 sm:px-8 py-2.5 sm:py-3 border-b-2 border-[#2F3E2E]/30 text-[#2F3E2E] text-xs font-bold tracking-[0.25em] uppercase hover:text-[#4A5D44] hover:border-[#4A5D44] focus:text-[#4A5D44] focus:border-[#4A5D44] focus:outline-none focus:ring-2 focus:ring-[#4A5D44] focus:ring-offset-2 transition-all group min-h-11"
                 >
-                  Selengkapnya{" "}
+                  Gallery Dokumentasi{" "}
                   <ArrowRight
                     size={14}
                     className="group-hover:translate-x-1 transition-transform"
@@ -391,7 +395,7 @@ export default function Home() {
             >
               <div className="relative h-75 sm:h-96 md:h-144 w-full overflow-hidden shadow-2xl rounded-sm z-10">
                 <Image
-                  src="/images/nature-1.png"
+                  src="/images/nature-2.png"
                   alt="Alam Borobudur"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -479,7 +483,7 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
                   <Link 
-              href="https://wa.me/628123456789"
+              href="https://wa.me/6285801262682"
               className="px-10 sm:px-12 py-3.5 sm:py-4 bg-[#E5E7E1] text-[#2F3E2E] text-xs font-bold rounded-full tracking-[0.25em] uppercase hover:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#E5E7E1] focus:ring-offset-2 focus:ring-offset-[#2F3E2E] transition-all hover:scale-105 active:scale-100 shadow-2xl hover:shadow-[#E5E7E1]/20 min-h-11 flex items-center justify-center"
                   >
               Hubungi Kami Sekarang
