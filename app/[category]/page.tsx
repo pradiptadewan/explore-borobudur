@@ -26,7 +26,7 @@ const categoryDetails: Record<string, {
     title: "Sewa VW Safari Borobudur",
     subtitle: "CLASSIC TRIP MAGELANG",
     description: "Layanan sewa VW Safari Borobudur terbaik untuk keliling desa wisata. Rute melewati persawahan, candi, dan pegunungan Menoreh. Cocok untuk foto prewedding, keluarga, dan gathering kantor.",
-    image: "/images/vw-main.png",
+    image: "/images/vw-main2.jpg",
     icon: <Camera className="w-8 h-8 text-[#E8ECE9]" />,
     color: "bg-[#4A5D44]",
     details: [

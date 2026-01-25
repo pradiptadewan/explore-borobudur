@@ -26,7 +26,7 @@ export const siteConfig = {
 };
 
 export const categories: Category[] = [
-  { id: "vw", name: "VW Safari", image: "/images/vw-main.png" },
+  { id: "vw", name: "VW Safari", image: "/images/vw-main.jpg" },
   { id: "jeep", name: "Jeep Adventure", image: "/images/jeep-main.png" },
   { id: "atv", name: "ATV Ride", image: "/images/atv-main.png" },
   { id: "rafting", name: "Rafting Elo", image: "/images/rafting-main.png" },
@@ -42,7 +42,7 @@ export const packages: Record<string, TourPackage[]> = {
       pax: 4, 
       desc: "Paket hemat berkeliling desa wisata Borobudur dengan VW Classic.", 
       category: "vw",
-      images: ["/images/vw1.png", "/images/vw2.png", "/images/vw3.png"],
+      images: ["/images/vw-main4.jpg", "/images/vw-main2.jpg", "/images/vw-main3.jpg"],
       features: ["1 Unit VW Safari", "2 Kunjungan Edukasi", "1 Kunjungan Destinasi", "Spot Foto Menarik"]
     },
     { 
@@ -53,7 +53,7 @@ export const packages: Record<string, TourPackage[]> = {
       pax: 4, 
       desc: "Puas berkeliling desa dan mengunjungi berbagai sentra kerajinan lokal.", 
       category: "vw",
-      images: ["/images/vw1.png", "/images/vw2.png", "/images/vw3.png"],
+      images: ["/images/vw-main5.jpg", "/images/vw-main4.jpg", "/images/vw-main2.jpg"],
       features: ["1 Unit VW Safari", "3 Kunjungan Edukasi", "1 Kunjungan Destinasi", "Spot Foto Menarik"]
     },
     { 
@@ -64,7 +64,7 @@ export const packages: Record<string, TourPackage[]> = {
       pax: 4, 
       desc: "Mengejar matahari terbit dengan latar belakang Pemandangan Alam.", 
       category: "vw",
-      images: ["/images/vw1.png", "/images/vw2.png", "/images/vw3.png"],
+      images: ["/images/vw-main2.jpg", "/images/vw-main3.jpg", "/images/vw-main4.jpg"],
       features: ["1 Unit VW Safari", "1 Spot Sunrise (Punthuk)", "2 Kunjungan Destinasi", "Spot Foto Menarik"]
     },
     { 
@@ -75,7 +75,7 @@ export const packages: Record<string, TourPackage[]> = {
       pax: 4, 
       desc: "Eksplorasi total Borobudur dari edukasi hingga destinasi alam.", 
       category: "vw",
-      images: ["/images/vw1.png", "/images/vw2.png", "/images/vw3.png"],
+      images: ["/images/vw-main4.jpg", "/images/vw-main3.jpg", "/images/vw-main2.jpg"],
       features: ["1 Unit VW Safari", "Kunjungan Edukasi Lengkap", "Kunjungan Destinasi Alam", "Spot Foto Menarik"]
     },
   ],

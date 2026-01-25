@@ -8,10 +8,12 @@ import {
   Zap,
   Droplets,
   Mountain,
+  Play,
 } from "lucide-react";
 import { JSX } from "react";
 import * as motion from "framer-motion/client";
 import { Metadata } from "next";
+import VideoPlayer from "components/VideoPlayer";
 
 export const metadata: Metadata = {
   title: "Sewa VW Safari Borobudur & Paket Wisata Adventure Terlengkap",
@@ -40,7 +42,7 @@ const featuresData: FeatureData[] = [
     subtitle: "WISATA HITS MAGELANG",
     description:
       "Paket wisata terpopuler berkeliling desa wisata Borobudur menggunakan mobil VW klasik. Kunjungi sentra UMKM Rengginang, Madu, Batik, dan berfoto dengan latar Pegunungan Menoreh yang instagramable.",
-    image: "/images/vw-main.png",
+    image: "/images/vw-main.jpg",
     stats: ["Mobil Klasik", "Edukasi UMKM", "Spot Instagramable"],
     icon: <Camera className="w-6 h-6 text-[#E8ECE9]" />,
     color: "bg-[#4A5D44]",
@@ -368,6 +370,62 @@ export default function Home() {
                 />
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 md:py-28 bg-[#DaddD6] relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-64 h-64 bg-[#4A5D44]/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#2F3E2E]/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="w-full md:w-1/2 text-center md:text-left"
+            >
+              <div className="flex items-center justify-center md:justify-start gap-2 mb-4">
+                <span className="p-2 bg-[#4A5D44] rounded-full text-white">
+                    <Play size={16} fill="currentColor" />
+                </span>
+                <span className="text-[#4A5D44] font-bold tracking-[0.25em] text-xs uppercase">
+                  Video Tour
+                </span>
+              </div>
+              
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-[#2F3E2E] mb-6 leading-tight">
+                Intip Keseruan <br />
+                <span className="italic font-light opacity-80">Liburan Bareng Kami</span>
+              </h2>
+              
+              <p className="text-[#4A5D44] text-base md:text-lg leading-relaxed mb-8 font-light max-w-lg mx-auto md:mx-0">
+                Tonton cuplikan perjalanan seru mengelilingi desa wisata Borobudur dan pacu adrenalin Anda sekarang.
+              </p>
+
+              <div className="hidden md:flex gap-4">
+                 <div className="h-px w-24 bg-[#2F3E2E]/20 self-center"></div>
+                 <span className="text-xs font-serif italic text-[#2F3E2E]/60">Explore Borobudur ID</span>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="w-full md:w-1/2 flex justify-center"
+            >
+              <div className="relative w-70 sm:w-[320px] aspect-9/16 rounded-[2.5rem] border-8 border-[#2F3E2E] shadow-2xl bg-black overflow-hidden ring-4 ring-[#2F3E2E]/20 transform md:-rotate-2 hover:rotate-0 transition-transform duration-500">
+
+                <VideoPlayer 
+                  src="/videos/video.mp4" 
+                  poster="/images/vw-main.jpg"
+                />
+
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>

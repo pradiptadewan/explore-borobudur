@@ -11,12 +11,11 @@ const galleryData = {
     title: "Classic VW Safari",
     description: "Momen estetik menyusuri pedesaan dan persawahan Borobudur.",
     images: [
-      "/images/vw-ga1.jpg",
-      "/images/vw-ga2.jpg",
-      "/images/vw-ga3.jpg",
-      "/images/vw-ga4.jpg",
-      "/images/vw-ga5.jpg",
-      "/images/vw-ga6.jpg",
+      "/images/vw-main.jpg",
+      "/images/vw-main2.jpg",
+      "/images/vw-ga8.jpg",
+      "/images/vw-main4.jpg",
+      "/images/vw-ga7.jpg",
     ]
   },
   jeep: {
