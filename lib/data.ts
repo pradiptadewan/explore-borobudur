@@ -9,8 +9,8 @@ export interface TourPackage {
   pax: number;
   desc: string;
   category: string;
-  features?: string[]; // Opsional: detail poin rute
-  image: string; // WAJIB: Agar setiap card punya foto beda
+  features?: string[];
+  images: string[];
 }
 
 export interface Category {
@@ -42,7 +42,7 @@ export const packages: Record<string, TourPackage[]> = {
       pax: 4, 
       desc: "Paket hemat berkeliling desa wisata Borobudur dengan VW Classic.", 
       category: "vw",
-      image: "/images/vw1.png",
+      images: ["/images/vw1.png", "/images/vw2.png", "/images/vw3.png"],
       features: ["1 Unit VW Safari", "2 Kunjungan Edukasi", "1 Kunjungan Destinasi", "Spot Foto Menarik"]
     },
     { 
@@ -53,7 +53,7 @@ export const packages: Record<string, TourPackage[]> = {
       pax: 4, 
       desc: "Puas berkeliling desa dan mengunjungi berbagai sentra kerajinan lokal.", 
       category: "vw",
-      image: "/images/vw2.png",
+      images: ["/images/vw1.png", "/images/vw2.png", "/images/vw3.png"],
       features: ["1 Unit VW Safari", "3 Kunjungan Edukasi", "1 Kunjungan Destinasi", "Spot Foto Menarik"]
     },
     { 
@@ -62,9 +62,9 @@ export const packages: Record<string, TourPackage[]> = {
       price: 650000, 
       duration: "3 Jam", 
       pax: 4, 
-      desc: "Mengejar matahari terbit dengan latar belakang Candi Borobudur.", 
+      desc: "Mengejar matahari terbit dengan latar belakang Pemandangan Alam.", 
       category: "vw",
-      image: "/images/vw4.png",
+      images: ["/images/vw1.png", "/images/vw2.png", "/images/vw3.png"],
       features: ["1 Unit VW Safari", "1 Spot Sunrise (Punthuk)", "2 Kunjungan Destinasi", "Spot Foto Menarik"]
     },
     { 
@@ -75,7 +75,7 @@ export const packages: Record<string, TourPackage[]> = {
       pax: 4, 
       desc: "Eksplorasi total Borobudur dari edukasi hingga destinasi alam.", 
       category: "vw",
-      image: "/images/vw3.png",
+      images: ["/images/vw1.png", "/images/vw2.png", "/images/vw3.png"],
       features: ["1 Unit VW Safari", "Kunjungan Edukasi Lengkap", "Kunjungan Destinasi Alam", "Spot Foto Menarik"]
     },
   ],
@@ -88,7 +88,7 @@ export const packages: Record<string, TourPackage[]> = {
        pax: 4, 
        desc: "Menjelajah rute menantang di kaki bukit Menoreh.", 
        category: "jeep",
-       image: "/images/jeep1.png",
+       images: ["/images/jeep1.png","/images/jeep2.jpg","/images/jeep3.jpg"],
        features: ["Jeep Offroad", "Driver Profesional", "Rute Sungai & Hutan", "Safety Gear"]
      },
   ],
@@ -102,7 +102,7 @@ export const packages: Record<string, TourPackage[]> = {
       pax: 1, 
       desc: "Explore unpredictable tracks of the Sileng River. Conquer the great obstacles and challenges!", 
       category: "atv",
-      image: "/images/atv1.png",
+      images: ["/images/atv1.png","/images/atv2.png","/images/atv3.png"],
       features: [
         "Tour de Borobudur: Village & Paddy Field",
         "Menoreh View",
@@ -119,7 +119,7 @@ export const packages: Record<string, TourPackage[]> = {
       pax: 1, 
       desc: "Bring your family to explore the Borobudur area, enjoy greenery nature of Menoreh Hills.", 
       category: "atv",
-      image: "/images/atv2.png",
+      images: ["/images/atv2.png", "/images/atv3.png", "/images/atv1.png"],
       features: [
         "Tour de Borobudur: Village & Paddy Field",
         "Stop by 2 Home Industries",
@@ -136,7 +136,7 @@ export const packages: Record<string, TourPackage[]> = {
       pax: 1, 
       desc: "Get your adrenaline pumping while riding your ATV. Enjoy the thrill of an awe-inspiring exploration!", 
       category: "atv",
-      image: "/images/atv3.png",
+      images: ["/images/atv3.png", "/images/atv2.png", "/images/atv1.png"],
       features: [
         "Tour de Borobudur: Village & Paddy Field",
         "Stop by 2 Home Industries",
@@ -154,7 +154,7 @@ export const packages: Record<string, TourPackage[]> = {
        pax: 6, 
        desc: "Arung jeram sungai Elo grade 2-3, aman untuk pemula.", 
        category: "rafting",
-       image: "/images/rafting1.png",
+       images: ["/images/rafting1.png", "/images/rafting2.jpg", "/images/rafting3.jpg"],
        features: ["Perahu Karet & Guide", "Makan Siang", "Kelapa Muda", "Dokumentasi & Asuransi"]
      },
   ],

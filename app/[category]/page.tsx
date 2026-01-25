@@ -1,12 +1,10 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Camera, Mountain, Zap, Droplets } from "lucide-react";
+import { Camera, Mountain, Zap, Droplets } from "lucide-react";
 import { JSX } from "react";
-// Pastikan path import ini benar sesuai struktur folder Anda
-import { packages, categories, TourPackage, Category, siteConfig } from "@/lib/data";
+import { packages, categories, TourPackage, siteConfig } from "@/lib/data";
 import PackageCard from "@/components/PackageCard";
-
 import DestinationHighlights from "@/components/vw/DestinationHighlights";
 import EducationInsight from "@/components/vw/EducationInsight";
 
@@ -14,7 +12,6 @@ interface PageProps {
   params: Promise<{ category: string }>;
 }
 
-// Konfigurasi Detail Header Kategori
 const categoryDetails: Record<string, {
   title: string;
   subtitle: string;
@@ -23,90 +20,109 @@ const categoryDetails: Record<string, {
   icon: JSX.Element;
   color: string;
   details: string[];
+  keywords: string[];
 }> = {
   vw: {
-    title: "Classic VW Safari",
-    subtitle: "KENANGAN ABADI",
-    description: "Nikmati semilir angin pagi pedesaan Borobudur. Perjalanan santai menyusuri lorong waktu dengan mobil klasik, melewati persawahan hijau yang menyejukkan mata dan menyapa keramahtamahan warga lokal.",
+    title: "Sewa VW Safari Borobudur",
+    subtitle: "CLASSIC TRIP MAGELANG",
+    description: "Layanan sewa VW Safari Borobudur terbaik untuk keliling desa wisata. Rute melewati persawahan, candi, dan pegunungan Menoreh. Cocok untuk foto prewedding, keluarga, dan gathering kantor.",
     image: "/images/vw-main.png",
     icon: <Camera className="w-8 h-8 text-[#E8ECE9]" />,
     color: "bg-[#4A5D44]",
     details: [
-      "Spot Foto Alami dan Persawahan",
-      "Destinasi Wisata",
-      "Edukasi UMKM Industri",
-      "Driver Ramah & Berpengalaman",
+      "Spot Foto Instagramable",
+      "Kunjungan UMKM & Kerajinan",
+      "Wisata Alam & Persawahan",
+      "Armada VW Klasik Terawat",
     ],
+    keywords: ["Sewa VW Borobudur", "VW Safari Magelang", "Tiket VW Borobudur", "Paket Wisata VW Jogja"],
   },
   jeep: {
-    title: "Jeep Sunrise Explore",
-    subtitle: "PESONA PAGI",
-    description: "Saksikan matahari terbit dari spot terbaik di Menoreh. Rasakan sejuknya kabut pagi dan pacu adrenalin Anda menembus jalur sungai yang menyegarkan. Kombinasi sempurna antara ketenangan dan tantangan.",
+    title: "Jeep Wisata Merapi & Borobudur",
+    subtitle: "ADVENTURE OFFROAD",
+    description: "Paket wisata Jeep Sunrise Punthuk Setumbu dan Lava Tour. Rasakan sensasi offroad membelah sungai dan hutan dengan armada Jeep 4x4 yang tangguh dan driver berpengalaman.",
     image: "/images/jeep-main.png",
     icon: <Mountain className="w-8 h-8 text-[#E8ECE9]" />,
     color: "bg-[#6B705C]",
     details: [
       "Sunrise Punthuk Setumbu",
-      "Offroad Sungai & Hutan",
-      "Coffee Break di Alam Terbuka",
+      "Offroad Sungai Elo/Progo",
+      "Wisata Alam & Edukasi",
     ],
+    keywords: ["Jeep Wisata Borobudur", "Sewa Jeep Magelang", "Punthuk Setumbu Sunrise", "Offroad Borobudur"],
   },
   atv: {
-    title: "ATV Jungle Adventure",
-    subtitle: "KEBEBASAN HAKIKI",
-    description: "Alam yang memukau, sawah hijau tak berujung, candi eksotis, dan keramahtamahan warga menjadikan tempat ini rumah bagi jiwa petualang. Taklukkan rute menantang di kaki bukit Menoreh.",
+    title: "ATV Adventure Menoreh",
+    subtitle: "EXTREME SPORT",
+    description: "Sewa ATV di Borobudur dengan track menantang. Jelajahi hutan pinus, sungai, dan lumpur di kaki bukit Menoreh. Aktivitas outdoor seru untuk memacu adrenalin.",
     image: "/images/atv-main.png",
     icon: <Zap className="w-8 h-8 text-[#E8ECE9]" />,
     color: "bg-[#584B3F]",
     details: [
-      "Pemandu Profesional & Helm/Boots",
-      "Dokumentasi Foto & Video",
-      "P3K & Retribusi Desa",
+      "Safety Gear (Helm & Boots)",
+      "Pemandu ATV Professional",
+      "Dokumentasi Keseruan",
     ],
+    keywords: ["Sewa ATV Borobudur", "ATV Magelang", "Wisata Adventure Jogja", "Outbound Borobudur"],
   },
   rafting: {
-    title: "Elo River Rafting",
-    subtitle: "KESEGARAN AIR",
-    description: "Segarkan pikiran dengan jernihnya air Sungai Elo. Arung jeram grade pemula yang aman namun tetap seru. Tertawa lepas bersama sahabat sambil menikmati relief alam bebatuan sungai yang eksotis.",
+    title: "Rafting Sungai Elo Magelang",
+    subtitle: "WISATA AIR SERU",
+    description: "Paket Rafting Sungai Elo murah fasilitas lengkap. Arung jeram grade wisata aman untuk pemula. Nikmati kesegaran air sungai dan keindahan alam Magelang.",
     image: "/images/rafting-main.png",
     icon: <Droplets className="w-8 h-8 text-[#E8ECE9]" />,
     color: "bg-[#5F6F65]",
     details: [
-      "Termasuk Makan Siang",
-      "Asuransi & Tim Penyelamat",
-      "Fasilitas Bilas Bersih",
+      "Makan Siang Prasmanan",
+      "Asuransi & P3K",
+      "Transport Lokal & Kamar Bilas",
     ],
+    keywords: ["Rafting Sungai Elo", "Arung Jeram Magelang", "Paket Rafting Murah", "Wisata Air Borobudur"],
   },
 };
 
 export async function generateMetadata(props: PageProps) {
   const params = await props.params;
-  const cat = categories.find((c: Category) => c.id === params.category);
-  const detail = cat ? categoryDetails[params.category] : null;
+  
+  const validCategory = categories.find(c => c.id === params.category);
+  const detail = categoryDetails[params.category];
+  
+  if (!validCategory || !detail) return { title: "Paket Wisata Tidak Ditemukan" };
+
   return {
-    title: detail ? `${detail.title} | ${siteConfig.name}` : "Paket Wisata",
-    description: detail?.description || `Pilih paket ${cat?.name || ""} yang sesuai dengan kebutuhan liburan Anda.`,
+    title: `${detail.title} Murah & Fasilitas Lengkap 2025 | Explore Borobudur`,
+    description: detail.description,
+    keywords: detail.keywords,
+    openGraph: {
+      title: detail.title,
+      description: detail.description,
+      images: [detail.image],
+    },
+    alternates: {
+        canonical: `https://exploreborobudur.id/${params.category}`,
+    },
   };
 }
 
 export default async function CategoryPage(props: PageProps) {
   const params = await props.params;
 
-  // Mengambil data langsung dari lib/data.ts
+  const validCategory = categories.find(c => c.id === params.category);
   const categoryPackages = packages[params.category];
-  const categoryInfo = categories.find((c: Category) => c.id === params.category);
   const detail = categoryDetails[params.category];
 
-  if (!categoryPackages || !categoryInfo || !detail) return notFound();
+  if (!validCategory || !categoryPackages || !detail) return notFound();
 
   return (
     <main className="bg-[#E5E7E1] min-h-screen text-[#2F3E2E] font-sans overflow-x-hidden">
-      {/* HERO SECTION */}
-      <section className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] w-full overflow-hidden">
+      {/* FIX 1: Tinggi section diperbesar menjadi min-h-[75vh] agar teks memiliki ruang 
+        untuk turun ke bawah, menjauhi area navbar yang fixed di atas.
+      */}
+      <section className="relative min-h-[75vh] sm:min-h-[85vh] w-full overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src={detail.image}
-            alt={detail.title}
+            alt={`Wisata ${detail.title}`}
             fill
             sizes="100vw"
             className="object-cover"
@@ -117,15 +133,10 @@ export default async function CategoryPage(props: PageProps) {
           <div className="absolute inset-0 bg-linear-to-b from-[#2F3E2E]/50 via-[#2F3E2E]/30 to-[#4A5D44]/60"></div>
         </div>
 
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 md:px-20 h-full flex flex-col justify-end pb-8 sm:pb-12 md:pb-16">
-          {/* <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-[#E5E7E1] hover:text-white mb-6 sm:mb-8 transition-colors group w-fit"
-          >
-            <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-            <span className="text-sm sm:text-base font-semibold tracking-wide">Kembali</span>
-          </Link> */}
-
+        {/* FIX 2: Ditambahkan 'pt-32' (padding top) sebagai safety margin 
+          agar konten tidak pernah menabrak navbar meskipun layar di-resize.
+        */}
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 md:px-20 h-full flex flex-col justify-end pt-32 pb-8 sm:pb-12 md:pb-16">
           <div className="flex items-center gap-3 sm:gap-4 mb-4">
             <div className={`p-3 sm:p-4 rounded-full ${detail.color} shadow-lg text-white ring-2 sm:ring-4 ring-[#E5E7E1]/50`}>
               {detail.icon}
@@ -145,16 +156,14 @@ export default async function CategoryPage(props: PageProps) {
         </div>
       </section>
 
-      {/* CONTENT SECTION */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-[#E5E7E1]">
         <div className="container mx-auto">
-          {/* Facility List */}
           <div className="mb-12 sm:mb-16">
             <div className="flex items-center gap-3 mb-4">
               <div className="h-0.75 w-12 bg-linear-to-r from-[#4A5D44] to-[#A3B18A] rounded-full"></div>
-              <span className="text-[#4A5D44] font-bold tracking-[0.3em] text-xs uppercase">
-                Fasilitas & Layanan
-              </span>
+              <h2 className="text-[#4A5D44] font-bold tracking-[0.3em] text-xs uppercase">
+                Fasilitas & Keunggulan
+              </h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
               {detail.details.map((item, idx) => (
@@ -171,19 +180,18 @@ export default async function CategoryPage(props: PageProps) {
             </div>
           </div>
 
-          {/* Package List */}
           <div className="mb-8 sm:mb-12">
             <div className="flex items-center gap-3 mb-6 sm:mb-8">
               <div className="h-0.75 w-12 bg-linear-to-r from-[#4A5D44] to-[#A3B18A] rounded-full"></div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-[#2F3E2E] tracking-tight">
-                Pilih Paket Anda
+                Daftar Harga Paket {detail.title}
               </h2>
             </div>
             <p className="text-[#586356] text-sm sm:text-base mb-8 sm:mb-12 max-w-2xl font-light">
-              Pilih paket yang sesuai dengan kebutuhan dan budget Anda.
+              Berikut adalah pilihan paket wisata {detail.title} yang tersedia. Hubungi kami untuk penawaran harga rombongan.
               {params.category === 'atv' 
-                ? " Harga Single untuk 1 orang/ATV dan Double untuk 2 orang (boncengan)." 
-                : " Semua paket sudah termasuk armada, driver, dan BBM."}
+                ? " Tersedia ATV Single dan Tandem." 
+                : " Harga sudah termasuk driver, BBM, dan armada."}
             </p>
           </div>
 
@@ -195,7 +203,6 @@ export default async function CategoryPage(props: PageProps) {
         </div>
       </section>
 
-      {/* VW Specific Components */}
       {params.category === "vw" && (
         <>
           <DestinationHighlights />
@@ -203,27 +210,26 @@ export default async function CategoryPage(props: PageProps) {
         </>
       )}
 
-      {/* Footer CTA */}
       <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 bg-[#DaddD6]">
         <div className="container mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-[#2F3E2E] mb-4 sm:mb-6">
-            Siap Memulai Petualangan?
+            Butuh Bantuan Memilih Paket?
           </h2>
           <p className="text-[#586356] text-sm sm:text-base md:text-lg mb-8 sm:mb-10 max-w-xl mx-auto font-light">
-            Hubungi kami sekarang untuk reservasi atau konsultasi paket yang sesuai dengan kebutuhan Anda.
+            Konsultasikan rencana liburan Anda di Borobudur bersama kami. Gratis konsultasi itinerary dan rekomendasi hotel.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link
-              href={`https://wa.me/${siteConfig.whatsappNumber}`}
-              className="px-8 sm:px-10 py-3.5 sm:py-4 bg-[#2F3E2E] text-[#E5E7E1] text-xs font-bold rounded-full tracking-[0.2em] uppercase hover:bg-[#4A5D44] focus:bg-[#4A5D44] focus:outline-none focus:ring-2 focus:ring-[#4A5D44] focus:ring-offset-2 transition-all shadow-xl hover:shadow-2xl hover:scale-105 active:scale-100 min-h-11 flex items-center justify-center"
+              href={`https://wa.me/${siteConfig.whatsappNumber}?text=Halo%20Admin,%20saya%20mau%20booking%20paket%20${detail.title}`}
+              className="px-8 sm:px-10 py-3.5 sm:py-4 bg-[#2F3E2E] text-[#E5E7E1] text-xs font-bold rounded-full tracking-[0.2em] uppercase hover:bg-[#4A5D44] focus:bg-[#4A5D44] transition-all shadow-xl hover:shadow-2xl hover:scale-105 active:scale-100 min-h-11 flex items-center justify-center"
             >
-              Hubungi via WhatsApp
+              Chat WhatsApp
             </Link>
             <Link
               href="/"
-              className="px-8 sm:px-10 py-3.5 sm:py-4 border-2 border-[#2F3E2E] text-[#2F3E2E] text-xs font-bold rounded-full tracking-[0.2em] uppercase hover:bg-[#2F3E2E] hover:text-[#E5E7E1] focus:bg-[#2F3E2E] focus:text-[#E5E7E1] focus:outline-none focus:ring-2 focus:ring-[#2F3E2E] focus:ring-offset-2 transition-all min-h-11 flex items-center justify-center"
+              className="px-8 sm:px-10 py-3.5 sm:py-4 border-2 border-[#2F3E2E] text-[#2F3E2E] text-xs font-bold rounded-full tracking-[0.2em] uppercase hover:bg-[#2F3E2E] hover:text-[#E5E7E1] transition-all min-h-11 flex items-center justify-center"
             >
-              Lihat Paket Lainnya
+              Menu Utama
             </Link>
           </div>
         </div>

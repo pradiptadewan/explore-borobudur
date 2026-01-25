@@ -21,12 +21,11 @@ export default function Navbar() {
     ? "text-[#2F3E2E]"
     : "text-[#E5E7E1]";
 
-  const navBg =
-    isOpen
-      ? "bg-transparent"
-      : scrolled
-      ? "bg-[#E5E7E1]/90 backdrop-blur-md shadow-sm"
-      : "bg-transparent";
+  const navBg = isOpen
+    ? "bg-transparent" 
+    : scrolled
+    ? "bg-[#E5E7E1]/90 backdrop-blur-md shadow-sm"
+    : "bg-transparent";
 
   const links = [
     { name: "Home", href: "/" },
@@ -38,47 +37,49 @@ export default function Navbar() {
   ];
 
   return (
-    <nav
-      className={`fixed w-full z-50 transition-all duration-300 ease-in-out ${navBg} py-4 md:py-6`}
-    >
-      <div className="container mx-auto px-6 flex justify-between items-center">
-        <Link
-          href="/"
-          onClick={() => setIsOpen(false)}
-          className={`relative z-50 flex flex-col text-xl font-serif font-bold tracking-wider uppercase transition-colors duration-300 ${textColor}`}
-        >
-          <span>Explore</span>
-          <span className="italic font-light opacity-80 leading-none">
-            Borobudur
-          </span>
-        </Link>
+    <>
+      <nav
+        className={`fixed w-full z-50 transition-colors duration-300 ease-in-out ${navBg} py-4 md:py-6`}
+      >
+        <div className="container mx-auto px-6 flex justify-between items-center">
+          <Link
+            href="/"
+            onClick={() => setIsOpen(false)}
+            className={`relative z-50 flex flex-col text-xl font-serif font-bold tracking-wider uppercase transition-colors duration-300 ${textColor}`}
+          >
+            <span>Explore</span>
+            <span className="italic font-light opacity-80 leading-none">
+              Borobudur
+            </span>
+          </Link>
 
-        <div className="hidden md:flex space-x-10">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`text-xs font-bold tracking-[0.2em] uppercase hover:opacity-60 transition-all ${
-                scrolled ? "text-[#2F3E2E]" : "text-[#E5E7E1]"
-              } ${
-                pathname === link.href
-                  ? "underline decoration-2 underline-offset-4"
-                  : ""
-              }`}
-            >
-              {link.name}
-            </Link>
-          ))}
+          <div className="hidden md:flex space-x-10">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`text-xs font-bold tracking-[0.2em] uppercase hover:opacity-60 transition-all ${
+                  scrolled ? "text-[#2F3E2E]" : "text-[#E5E7E1]"
+                } ${
+                  pathname === link.href
+                    ? "underline decoration-2 underline-offset-4"
+                    : ""
+                }`}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
+
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className={`relative z-50 md:hidden transition-colors duration-300 ${textColor} focus:outline-none`}
+            aria-label="Toggle Menu"
+          >
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
         </div>
-
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className={`relative z-50 md:hidden transition-colors duration-300 ${textColor} focus:outline-none`}
-          aria-label="Toggle Menu"
-        >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
-      </div>
+      </nav>
 
       <div
         className={`fixed inset-0 z-40 bg-[#2F3E2E] flex flex-col justify-center items-center space-y-8 transition-all duration-500 ease-in-out ${
@@ -98,6 +99,6 @@ export default function Navbar() {
           </Link>
         ))}
       </div>
-    </nav>
+    </>
   );
 }

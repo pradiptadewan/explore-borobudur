@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image";
-import { Clock, Users, ArrowUpRight, CheckCircle2 } from "lucide-react"; // Import ikon Check
+import { Clock, Users, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import BookingModal from "./BookingModal";
 import { TourPackage } from "@/lib/data";
+import ImageSlider from "./ImageSlider";
 
 const formatRupiah = (price: number) => {
   return new Intl.NumberFormat("id-ID", {
@@ -19,16 +19,13 @@ export default function PackageCard({ pkg }: { pkg: TourPackage }) {
   return (
     <>
       <div className="group bg-[#F7F8F6] rounded-sm overflow-hidden border border-[#DaddD6] hover:border-[#A3B18A] transition-all duration-500 hover:shadow-xl flex flex-col h-full">
-        <div className="h-48 sm:h-56 md:h-64 relative overflow-hidden">
-          <Image
-            src={pkg.image}
-            alt={pkg.name}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            className="object-cover group-hover:scale-105 transition-transform duration-1000 grayscale-[0.2] group-hover:grayscale-0"
-            loading="lazy"
+        <div className="h-48 sm:h-56 md:h-64 relative overflow-hidden bg-gray-200">
+          <ImageSlider 
+            images={pkg.images} 
+            alt={`Paket Wisata ${pkg.name} - Explore Borobudur`} 
           />
-          <div className="absolute bottom-0 left-0 bg-[#E5E7E1] px-3 sm:px-4 py-1.5 sm:py-2 text-[#2F3E2E] text-[10px] sm:text-xs font-bold tracking-widest uppercase">
+          
+          <div className="absolute bottom-0 left-0 z-20 bg-[#E5E7E1] px-3 sm:px-4 py-1.5 sm:py-2 text-[#2F3E2E] text-[10px] sm:text-xs font-bold tracking-widest uppercase shadow-md">
             {pkg.category === 'atv' ? "Adventure Trip" : "Start from IDR"}
           </div>
         </div>
@@ -41,6 +38,7 @@ export default function PackageCard({ pkg }: { pkg: TourPackage }) {
             <ArrowUpRight
               className="text-[#A3B18A] opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 group-hover:-translate-y-1 shrink-0"
               size={20}
+              aria-hidden="true"
             />
           </div>
 
@@ -49,24 +47,24 @@ export default function PackageCard({ pkg }: { pkg: TourPackage }) {
           </p>
 
           {pkg.features && pkg.features.length > 0 && (
-             <div className="mb-4 space-y-2">
-               {pkg.features.slice(0, 3).map((feat, idx) => (
-                 <div key={idx} className="flex items-start gap-2 text-[11px] sm:text-xs text-[#2F3E2E]/80">
-                   <CheckCircle2 size={14} className="text-[#4A5D44] shrink-0 mt-0.5" />
-                   <span className="leading-tight">{feat}</span>
-                 </div>
-               ))}
-             </div>
+            <div className="mb-4 space-y-2">
+              {pkg.features.slice(0, 3).map((feat, idx) => (
+                <div key={idx} className="flex items-start gap-2 text-[11px] sm:text-xs text-[#2F3E2E]/80">
+                  <CheckCircle2 size={14} className="text-[#4A5D44] shrink-0 mt-0.5" aria-hidden="true" />
+                  <span className="leading-tight">{feat}</span>
+                </div>
+              ))}
+            </div>
           )}
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 text-[10px] sm:text-xs text-[#2F3E2E] font-medium tracking-wide mb-6 uppercase mt-auto pt-4">
-            <div className="flex items-center gap-2">
-              <Clock size={14} className="text-[#4A5D44] shrink-0" />
+            <div className="flex items-center gap-2" aria-label={`Durasi ${pkg.duration}`}>
+              <Clock size={14} className="text-[#4A5D44] shrink-0" aria-hidden="true" />
               <span>{pkg.duration}</span>
             </div>
             {pkg.category !== 'atv' && (
-              <div className="flex items-center gap-2">
-                <Users size={14} className="text-[#4A5D44] shrink-0" />
+              <div className="flex items-center gap-2" aria-label={`Maksimal ${pkg.pax} orang`}>
+                <Users size={14} className="text-[#4A5D44] shrink-0" aria-hidden="true" />
                 <span>Max {pkg.pax} Pax</span>
               </div>
             )}
@@ -95,6 +93,7 @@ export default function PackageCard({ pkg }: { pkg: TourPackage }) {
 
             <button
               onClick={() => setIsModalOpen(true)}
+              aria-label={`Booking paket ${pkg.name}`}
               className="w-full px-6 sm:px-8 py-2.5 sm:py-3 bg-[#2F3E2E] text-white text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase rounded-full hover:bg-[#4A5D44] focus:bg-[#4A5D44] focus:outline-none focus:ring-2 focus:ring-[#4A5D44] focus:ring-offset-2 transition-all min-h-11 flex items-center justify-center shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0"
             >
               Book Now

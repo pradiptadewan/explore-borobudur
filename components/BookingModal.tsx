@@ -24,7 +24,6 @@ export default function BookingModal({ pkg, isOpen, onClose }: BookingModalProps
     e.preventDefault();
     setLoading(true);
 
-    setTimeout(() => {
       const total = pkg.price * formData.qty;
       const message = `Halo, saya ingin memesan paket wisata:\n\n` +
         `📦 *Paket:* ${pkg.name} (${pkg.category.toUpperCase()})\n` +
@@ -40,7 +39,6 @@ export default function BookingModal({ pkg, isOpen, onClose }: BookingModalProps
       setLoading(false);
       window.open(waUrl, "_blank");
       onClose();
-    }, 1500);
   };
 
   return (
