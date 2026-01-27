@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { X, Loader2, Calendar, User, Hash, Clock } from "lucide-react"; // Ditambah icon Clock
+import { X, Loader2, Calendar, User, Hash, Clock } from "lucide-react";
 import { siteConfig, TourPackage } from "@/lib/data";
 
 interface BookingModalProps {
@@ -26,38 +26,30 @@ export default function BookingModal({ pkg, isOpen, onClose }: BookingModalProps
   const [formData, setFormData] = useState({
     name: "",
     date: "",
-    time: availableTimes[1], // Default jam 08:00
+    time: availableTimes[1],
     pax: pkg.pax,
     qty: 1,
   });
 
   if (!isOpen) return null;
 
-  // LOGIC: Mengatur jumlah orang dan otomatis update minimal unit
   const handlePaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newPax = parseInt(e.target.value) || 0;
     
-    // Hitung minimal unit yang dibutuhkan (1 unit max 4 orang)
-    // Contoh: 5 orang / 4 = 1.25 -> dibulatkan ke atas jadi 2 unit
     const minUnitsRequired = Math.ceil(newPax / 4);
 
     setFormData((prev) => ({
       ...prev,
       pax: newPax,
-      // Jika unit saat ini kurang dari yang dibutuhkan, update unitnya
-      // Jika unit saat ini sudah lebih (misal user mau 2 unit untuk 2 orang), biarkan saja
       qty: prev.qty < minUnitsRequired ? minUnitsRequired : prev.qty
     }));
   };
 
-  // LOGIC: Mengatur jumlah unit, mencegah user input di bawah kebutuhan
   const handleQtyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newQty = parseInt(e.target.value) || 1;
     const minUnitsRequired = Math.ceil(formData.pax / 4);
 
-    // Validasi: Tidak boleh kurang dari kebutuhan kapasitas
     if (newQty < minUnitsRequired) {
-      // Opsional: Bisa kasih alert atau biarkan value tetap di minUnitsRequired
       return; 
     }
 
@@ -73,7 +65,7 @@ export default function BookingModal({ pkg, isOpen, onClose }: BookingModalProps
         `📦 *Paket:* ${pkg.name} (${pkg.category.toUpperCase()})\n` +
         `👤 *Nama:* ${formData.name}\n` +
         `📅 *Tanggal:* ${formData.date}\n` +
-        `⏰ *Jam:* ${formData.time}\n` + // Ditambahkan ke pesan WA
+        `⏰ *Jam:* ${formData.time}\n` +
         `👥 *Jumlah Orang:* ${formData.pax}\n` +
         `🚙 *Jumlah Unit:* ${formData.qty}\n` +
         `💰 *Estimasi Total:* Rp ${total.toLocaleString('id-ID')}\n\n` +
@@ -86,15 +78,12 @@ export default function BookingModal({ pkg, isOpen, onClose }: BookingModalProps
       onClose();
   };
 
-  // Hitung min unit untuk atribut input 'min'
   const minQtyAllowed = Math.ceil(formData.pax / 4);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#2F3E2E]/60 backdrop-blur-sm transition-opacity">
-      {/* Modal Container */}
       <div className="bg-[#E5E7E1] w-full max-w-md rounded-sm shadow-2xl overflow-hidden relative animate-in fade-in zoom-in duration-300">
         
-        {/* Header Image/Pattern */}
         <div className="h-2 bg-[#2F3E2E] w-full"></div>
         
         <button 
@@ -114,7 +103,6 @@ export default function BookingModal({ pkg, isOpen, onClose }: BookingModalProps
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Input Name */}
             <div className="relative">
               <label className="text-xs font-bold uppercase tracking-wider text-[#586356] mb-1 block">Full Name</label>
               <div className="flex items-center border-b border-[#A3B18A] py-2">
@@ -130,7 +118,6 @@ export default function BookingModal({ pkg, isOpen, onClose }: BookingModalProps
             </div>
 
             <div className="grid grid-cols-2 gap-6">
-                {/* Input Date */}
                 <div className="relative">
                 <label className="text-xs font-bold uppercase tracking-wider text-[#586356] mb-1 block">Date</label>
                 <div className="flex items-center border-b border-[#A3B18A] py-2">
@@ -144,7 +131,6 @@ export default function BookingModal({ pkg, isOpen, onClose }: BookingModalProps
                 </div>
                 </div>
 
-                {/* Input Time (New Feature) */}
                 <div className="relative">
                 <label className="text-xs font-bold uppercase tracking-wider text-[#586356] mb-1 block">Time</label>
                 <div className="flex items-center border-b border-[#A3B18A] py-2">
@@ -181,16 +167,16 @@ export default function BookingModal({ pkg, isOpen, onClose }: BookingModalProps
               </div>
               <div>
                 <label className="text-xs font-bold uppercase tracking-wider text-[#586356] mb-1 block">
-                    Units <span className="text-[10px] lowercase font-normal opacity-70">(max 4 pax/unit)</span>
+                    Units <span className="text-[10px] lowercase font-normal opacity-70">(max 4 orang/unit)</span>
                 </label>
                 <div className="flex items-center border-b border-[#A3B18A] py-2">
                    <Hash size={16} className="text-[#4A5D44] mr-3" />
                    <input 
                     type="number" 
-                    min={minQtyAllowed} // Mencegah klik panah bawah melewati batas
+                    min={minQtyAllowed}
                     value={formData.qty} 
                     className="w-full bg-transparent text-[#2F3E2E] focus:outline-none text-sm"
-                    onChange={handleQtyChange} // Menggunakan handler baru
+                    onChange={handleQtyChange}
                   />
                 </div>
               </div>

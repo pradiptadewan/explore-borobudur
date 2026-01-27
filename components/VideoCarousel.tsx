@@ -15,7 +15,7 @@ const videoSlides = [
   {
     id: 2,
     src: "/videos/video.mp4",
-    poster: "/images/jeep-main.png",
+    poster: "/images/vw-main.png",
     title: "VW Safari Tour",
   },
 ];
