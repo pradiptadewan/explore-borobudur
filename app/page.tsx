@@ -13,7 +13,7 @@ import {
 import { JSX } from "react";
 import * as motion from "framer-motion/client";
 import { Metadata } from "next";
-import VideoPlayer from "components/VideoPlayer";
+import VideoCarousel from "@/components/VideoCarousel";
 
 export const metadata: Metadata = {
   title: "Sewa VW Safari Borobudur & Paket Wisata Adventure Terlengkap",
@@ -417,14 +417,7 @@ export default function Home() {
               transition={{ delay: 0.2 }}
               className="w-full md:w-1/2 flex justify-center"
             >
-              <div className="relative w-70 sm:w-[320px] aspect-9/16 rounded-[2.5rem] border-8 border-[#2F3E2E] shadow-2xl bg-black overflow-hidden ring-4 ring-[#2F3E2E]/20 transform md:-rotate-2 hover:rotate-0 transition-transform duration-500">
-
-                <VideoPlayer 
-                  src="/videos/video.mp4" 
-                  poster="/images/vw-main.jpg"
-                />
-
-              </div>
+              <VideoCarousel />
             </motion.div>
           </div>
         </div>
