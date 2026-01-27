@@ -1,10 +1,8 @@
-// lib/data.ts
-
 export interface TourPackage {
   id: string;
   name: string;
   price: number;
-  priceDouble?: number; // Opsional: harga boncengan (khusus ATV)
+  priceDouble?: number;
   duration: string;
   pax: number;
   desc: string;
@@ -81,15 +79,48 @@ export const packages: Record<string, TourPackage[]> = {
   ],
   jeep: [
      { 
-       id: "jeep-1", 
-       name: "Short Jeep", 
-       price: 450000, 
-       duration: "2 Jam", 
-       pax: 4, 
-       desc: "Menjelajah rute menantang di kaki bukit Menoreh.", 
+       id: "jeep-short", 
+       name: "Short Trip", 
+       price: 400000, 
+       duration: "1.5 Jam", 
+       pax: 3, 
+       desc: "Route visit madu & budidaya jamur serta berfoto dengan latar belakang sawah dan pegunungan.", 
        category: "jeep",
-       images: ["/images/jeep1.png","/images/jeep2.jpg","/images/jeep3.jpg"],
-       features: ["Jeep Offroad", "Driver Profesional", "Rute Sungai & Hutan", "Safety Gear"]
+       images: ["/images/jeep1.png", "/images/jeep2.jpg", "/images/jeep3.jpg"],
+       features: ["Visit Madu & Jamur", "View Sawah & Pegunungan", "Max 3 Pax/Jeep", "Driver Profesional"]
+     },
+     { 
+       id: "jeep-medium", 
+       name: "Medium Trip", 
+       price: 500000, 
+       duration: "3 Jam", 
+       pax: 3, 
+       desc: "Route sama dengan short trip di tambah wisata susur sungai yang memacu adrenalin.", 
+       category: "jeep",
+       images: ["/images/jeep2.jpg", "/images/jeep3.jpg", "/images/jeep1.png"],
+       features: ["All Short Trip Features", "Wisata Susur Sungai", "Max 3 Pax/Jeep", "Driver Profesional"]
+     },
+     { 
+       id: "jeep-long", 
+       name: "Long Trip", 
+       price: 750000, 
+       duration: "5 Jam", 
+       pax: 3, 
+       desc: "Paket lengkap! Route susur sungai di tambah trek fun offroad yang lebih menantang.", 
+       category: "jeep",
+       images: ["/images/jeep3.jpg", "/images/jeep1.png", "/images/jeep2.jpg"],
+       features: ["Route Susur Sungai", "Trek Fun Offroad", "Max 3 Pax/Jeep", "Durasi Lebih Lama"]
+     },
+     { 
+       id: "jeep-sunrise", 
+       name: "Sunrise Trip", 
+       price: 650000, 
+       duration: "5 Jam", 
+       pax: 3, 
+       desc: "Menikmati pagi hari dengan rute Punthuk Setumbu, Village Tour, dan Susur Sungai.", 
+       category: "jeep",
+       images: ["/images/jeep1.png", "/images/jeep3.jpg", "/images/jeep2.jpg"],
+       features: ["Sunrise Punthuk Setumbu", "Village Tour", "Susur Sungai", "Max 3 Pax/Jeep"]
      },
   ],
   atv: [
@@ -147,15 +178,37 @@ export const packages: Record<string, TourPackage[]> = {
   ],
   rafting: [
      { 
-       id: "rafting-1", 
-       name: "Rafting Elo", 
-       price: 750000, 
+       id: "rafting-a", 
+       name: "Paket A (Complete)", 
+       price: 650000, 
        duration: "2.5 Jam", 
-       pax: 6, 
-       desc: "Arung jeram sungai Elo grade 2-3, aman untuk pemula.", 
+       pax: 4, 
+       desc: "Paket rafting terlengkap dengan fasilitas makan besar setelah pengarungan.", 
        category: "rafting",
        images: ["/images/rafting1.png", "/images/rafting2.jpg", "/images/rafting3.jpg"],
-       features: ["Perahu Karet & Guide", "Makan Siang", "Kelapa Muda", "Dokumentasi & Asuransi"]
+       features: ["Pemandu & Shuttle", "Kelapa Muda & Snack", "Makan Besar", "Asuransi"]
+     },
+     { 
+       id: "rafting-b", 
+       name: "Paket B (Medium)", 
+       price: 575000, 
+       duration: "2.5 Jam", 
+       pax: 4, 
+       desc: "Pilihan favorit! Fasilitas lengkap termasuk snack kelapa muda yang menyegarkan.", 
+       category: "rafting",
+       images: ["/images/rafting2.jpg", "/images/rafting3.jpg", "/images/rafting1.png"],
+       features: ["Pemandu & Shuttle", "Kelapa Muda & Snack", "Asuransi", "Max 4 Pax/Boat"]
+     },
+     { 
+       id: "rafting-c", 
+       name: "Paket C (Basic)", 
+       price: 475000, 
+       duration: "2.5 Jam", 
+       pax: 4, 
+       desc: "Paket hemat untuk menikmati keseruan arung jeram Sungai Elo.", 
+       category: "rafting",
+       images: ["/images/rafting3.jpg", "/images/rafting1.png", "/images/rafting2.jpg"],
+       features: ["Pemandu & Shuttle", "Asuransi", "Harga Hemat", "Max 4 Pax/Boat"]
      },
   ],
 };

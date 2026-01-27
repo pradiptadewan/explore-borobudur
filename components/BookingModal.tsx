@@ -33,21 +33,28 @@ export default function BookingModal({ pkg, isOpen, onClose }: BookingModalProps
 
   if (!isOpen) return null;
 
+  // LOGIC BARU: Tentukan kapasitas per unit berdasarkan kategori
+  // Jika Jeep = 3, Selain itu (VW/Rafting) = 4
+  const maxPaxPerUnit = pkg.category === 'jeep' ? 3 : 4;
+
   const handlePaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newPax = parseInt(e.target.value) || 0;
     
-    const minUnitsRequired = Math.ceil(newPax / 4);
+    // Hitung unit otomatis berdasarkan maxPaxPerUnit (3 atau 4)
+    const minUnitsRequired = Math.ceil(newPax / maxPaxPerUnit);
 
     setFormData((prev) => ({
       ...prev,
       pax: newPax,
+      // Update qty otomatis jika kurang dari batas minimum
       qty: prev.qty < minUnitsRequired ? minUnitsRequired : prev.qty
     }));
   };
 
   const handleQtyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newQty = parseInt(e.target.value) || 1;
-    const minUnitsRequired = Math.ceil(formData.pax / 4);
+    // Validasi manual input qty juga menggunakan maxPaxPerUnit
+    const minUnitsRequired = Math.ceil(formData.pax / maxPaxPerUnit);
 
     if (newQty < minUnitsRequired) {
       return; 
@@ -78,7 +85,8 @@ export default function BookingModal({ pkg, isOpen, onClose }: BookingModalProps
       onClose();
   };
 
-  const minQtyAllowed = Math.ceil(formData.pax / 4);
+  // Batas minimum unit untuk input field number
+  const minQtyAllowed = Math.ceil(formData.pax / maxPaxPerUnit);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#2F3E2E]/60 backdrop-blur-sm transition-opacity">
@@ -167,7 +175,8 @@ export default function BookingModal({ pkg, isOpen, onClose }: BookingModalProps
               </div>
               <div>
                 <label className="text-xs font-bold uppercase tracking-wider text-[#586356] mb-1 block">
-                    Units <span className="text-[10px] lowercase font-normal opacity-70">(max 4 orang/unit)</span>
+                    {/* UI LABEL DINAMIS SESUAI KATEGORI */}
+                    Units <span className="text-[10px] lowercase font-normal opacity-70">(max {maxPaxPerUnit} orang/unit)</span>
                 </label>
                 <div className="flex items-center border-b border-[#A3B18A] py-2">
                    <Hash size={16} className="text-[#4A5D44] mr-3" />

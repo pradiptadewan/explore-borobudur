@@ -35,6 +35,7 @@ interface FeatureData {
   details: string[];
 }
 
+// DATA SUDAH DISESUAIKAN DENGAN BROSUR (Jeep, ATV, Rafting Updated)
 const featuresData: FeatureData[] = [
   {
     id: "vw",
@@ -55,53 +56,53 @@ const featuresData: FeatureData[] = [
   },
   {
     id: "jeep",
-    title: "Jeep Wisata Sunrise",
-    subtitle: "OFFROAD PUNTHUK SETUMBU",
+    title: "Parang Menoreh Jeep",
+    subtitle: "4X4 OFFROAD EXPERIENCE",
     description:
-      "Saksikan keindahan Golden Sunrise Borobudur dari Punthuk Setumbu. Lanjutkan petualangan dengan Jeep Offroad menyusuri sungai dan jalur pedesaan yang menantang adrenalin.",
+      "Jelajahi keindahan alam Borobudur dengan Jeep 4x4. Pilihan rute lengkap mulai dari Short Trip edukasi (Madu & Jamur), Susur Sungai yang memacu adrenalin, hingga Trek Fun Offroad dan Sunrise di Punthuk Setumbu.",
     image: "/images/jeep-main.png",
-    stats: ["Golden Sunrise", "Fun Offroad", "Basah-basahan"],
+    stats: ["Short/Medium/Long Trip", "Susur Sungai", "Sunrise"],
     icon: <Mountain className="w-6 h-6 text-[#E8ECE9]" />,
     color: "bg-[#6B705C]",
     details: [
-      "Tiket Punthuk Setumbu",
-      "Track Sungai & Lumpur",
-      "Helm & Safety Gear",
-      "Driver Jeep Profesional",
+      "Armada Jeep 4x4 Prima (Max 3 Pax)",
+      "Wisata Susur Sungai & Fun Offroad",
+      "Visit Edukasi Madu & Jamur",
+      "Sunrise Punthuk Setumbu",
     ],
   },
   {
     id: "atv",
-    title: "Sewa ATV Borobudur",
-    subtitle: "ADVENTURE HUTAN PINUS",
+    title: "ATV Adventure Menoreh",
+    subtitle: "EXTREME SPORT",
     description:
-      "Uji nyali Anda dengan mengendarai ATV menembus hutan pinus dan jalur berlumpur di kaki Bukit Menoreh. Pengalaman seru menaklukkan medan ekstrem dengan pemandangan alam asri.",
+      "Taklukkan rute Sungai Sileng yang tak terduga! Nikmati petualangan ATV melintasi sawah, desa wisata, dan dua kunjungan industri rumahan. Pilihan paket Single, Double, hingga Sunrise tersedia untuk memacu adrenalin Anda.",
     image: "/images/atv-main.png",
-    stats: ["Track Extreme", "Hutan Pinus", "Lumpur"],
+    stats: ["Fast Track", "Family Trip", "Adventure"],
     icon: <Zap className="w-6 h-6 text-[#E8ECE9]" />,
     color: "bg-[#584B3F]",
     details: [
-      "Track Hutan & Sungai",
-      "Guide Berpengalaman",
-      "Briefing Keamanan",
-      "Sepatu Boots & Helm",
+      "Explore Sileng River & Paddy Field",
+      "Stop by 2 Home Industries",
+      "Guide, Photo/Video & First Aid",
+      "Safety Gear (Helm & Boots)",
     ],
   },
   {
     id: "rafting",
     title: "Rafting Sungai Elo",
-    subtitle: "ARUNG JERAM MAGELANG",
+    subtitle: "WISATA AIR SERU",
     description:
-      "Rasakan serunya arung jeram di Sungai Elo Magelang dengan lintasan sepanjang 12,5 KM. Grade II–III yang stabil dan aman, cocok untuk pemula, keluarga, maupun kegiatan outbound. Dipandu instruktur profesional dengan standar keselamatan tinggi.",
+      "Arung jeram Sungai Elo Grade 2-3 yang aman bagi pemula. Paket lengkap dengan fasilitas makan besar, snack kelapa muda, dan asuransi. Satu perahu untuk maksimal 4 peserta dengan pemandu profesional.",
     image: "/images/rafting-main.png",
-    stats: ["Grade II–III", "Lintasan 12.5 KM", "Aman untuk Pemula"],
+    stats: ["Grade II–III", "Max 4 Pax/Boat", "Makan Besar"],
     icon: <Droplets className="w-6 h-6 text-[#E8ECE9]" />,
     color: "bg-[#5F6F65]",
     details: [
-      "Instruktur & Guide Berpengalaman",
-      "Peralatan Rafting Standar Nasional",
-      "Asuransi Peserta",
-      "Transport Lokal Start–Finish",
+      "Pemandu Profesional & Shuttle",
+      "Kelapa Muda & Snack",
+      "Makan Besar",
+      "Asuransi Cover",
     ],
   },
 ];
@@ -109,6 +110,7 @@ const featuresData: FeatureData[] = [
 const FeatureItem = ({ item, index }: { item: FeatureData; index: number }) => {
   const isEven = index % 2 === 0;
 
+  // BACKGROUND KEMBALI SEPERTI AWAL (Simple Alternating)
   return (
     <section
       id={item.id}
