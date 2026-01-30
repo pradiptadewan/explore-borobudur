@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Metadata } from "next";
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
     languages: {
-      'id-ID': '/',
+      "id-ID": "/",
     },
   },
 
@@ -54,7 +54,9 @@ export const metadata: Metadata = {
     "explore borobudur",
   ],
 
-  authors: [{ name: "Explore Borobudur Team", url: "https://exploreborobudur.id" }],
+  authors: [
+    { name: "Explore Borobudur Team", url: "https://exploreborobudur.id" },
+  ],
   creator: "Explore Borobudur",
   publisher: "Explore Borobudur",
 
@@ -95,10 +97,9 @@ export const metadata: Metadata = {
     },
   },
 
-  // 9. Verifikasi Search Console (Ganti kodenya nanti)
-  verification: {
-    google: "KODE_VERIFIKASI_GOOGLE_CONSOLE_ANDA",
-  },
+  // verification: {
+  //   google: "PASTIKAN_KODE_VERIFIKASI_GOOGLE_CONSOLE_DISINI",
+  // },
 
   icons: {
     icon: "/icon.png",
