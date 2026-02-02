@@ -76,7 +76,7 @@ const restoPackages: RestoPackage[] = [
     id: 3,
     name: "Paket 3",
     price: "IDR 40.000 / pax",
-    image: "/images/buffet.webp", 
+    image: "/images/buffet.webp",
     menu: [
       "Nasi Putih",
       "Sayur Lodeh",
@@ -259,7 +259,7 @@ const FeatureItem = ({ item, index }: { item: FeatureData; index: number }) => {
                 src={item.image}
                 alt={`Paket Wisata ${item.title} Murah`}
                 fill
-                sizes="(max-width: 768px) 100vw, 50vw"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
                 className="object-cover transition-all duration-1000 ease-in-out group-hover:scale-105 grayscale-[0.1] group-hover:grayscale-0"
                 loading="lazy"
               />
@@ -323,12 +323,14 @@ const FeatureItem = ({ item, index }: { item: FeatureData; index: number }) => {
             <Link
               href={`/${item.id}`}
               className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-3.5 bg-[#2F3E2E] text-[#E5E7E1] text-xs font-bold rounded-full tracking-[0.2em] uppercase hover:bg-[#4A5D44] focus:bg-[#4A5D44] transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-0.5 text-center min-h-11 flex items-center justify-center"
+              aria-label={`Cek Harga Promo ${item.title}`}
             >
               Cek Harga Promo
             </Link>
             <Link
               href={`/${item.id}`}
               className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-3.5 border-2 border-[#2F3E2E] text-[#2F3E2E] text-xs font-bold rounded-full tracking-[0.2em] uppercase hover:bg-[#2F3E2E] hover:text-[#E5E7E1] transition-all duration-300 text-center min-h-11 flex items-center justify-center"
+              aria-label={`Detail Itinerary ${item.title}`}
             >
               Detail Itinerary
             </Link>
@@ -368,14 +370,21 @@ const RestoSection = () => {
   };
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
     const handleResize = () => {
-      if (window.innerWidth < 640) setItemsPerPage(1);
-      else if (window.innerWidth < 1024) setItemsPerPage(2);
-      else setItemsPerPage(3);
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        if (window.innerWidth < 640) setItemsPerPage(1);
+        else if (window.innerWidth < 1024) setItemsPerPage(2);
+        else setItemsPerPage(3);
+      }, 200);
     };
     handleResize();
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   useEffect(() => {
@@ -388,55 +397,64 @@ const RestoSection = () => {
   return (
     <section className="py-20 md:py-32 bg-[#2F3E2E] text-[#E5E7E1] relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center mb-16 lg:mb-24">
-          
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="w-full lg:w-3/5"
           >
-             <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 bg-[#A3B18A] rounded-full text-[#2F3E2E]">
-                    <Utensils size={20} />
-                </div>
-                <h3 className="text-[#A3B18A] font-bold text-xs tracking-[0.3em] uppercase">
-                    Joglo Dhepis Resto
-                </h3>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 bg-[#A3B18A] rounded-full text-[#2F3E2E]">
+                <Utensils size={20} />
+              </div>
+              <h3 className="text-[#A3B18A] font-bold text-xs tracking-[0.3em] uppercase">
+                Joglo Dhepis Resto
+              </h3>
             </div>
-            
+
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif mb-6 leading-tight">
-              Cita Rasa Lezat <br/>
+              Cita Rasa Lezat <br />
               <span className="text-[#A3B18A] italic">Harga Bersahabat</span>
             </h2>
 
             <p className="text-[#E5E7E1]/80 text-base md:text-lg leading-relaxed mb-8 font-light">
-              Lengkapi wisata Anda dengan hidangan lezat di Joglo Dhepis. Kami melayani 
-              pemesanan rombongan, prasmanan, reuni, hingga acara gathering kantor
-              dengan kapasitas luas dan suasana Joglo yang asri.
+              Lengkapi wisata Anda dengan hidangan lezat di Joglo Dhepis. Kami
+              melayani pemesanan rombongan, prasmanan, reuni, hingga acara
+              gathering kantor dengan kapasitas luas dan suasana Joglo yang
+              asri.
             </p>
 
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {["Kapasitas 50+ Pax", "Karaoke", "Proyektor", "Sound System"].map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-3">
-                         <div className="w-1.5 h-1.5 rounded-full bg-[#A3B18A]"></div>
-                         <span className="text-sm font-medium tracking-wide">{item}</span>
-                    </li>
-                ))}
+              {[
+                "Kapasitas 50+ Pax",
+                "Karaoke",
+                "Proyektor",
+                "Sound System",
+              ].map((item, idx) => (
+                <li key={idx} className="flex items-center gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#A3B18A]"></div>
+                  <span className="text-sm font-medium tracking-wide">
+                    {item}
+                  </span>
+                </li>
+              ))}
             </ul>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             className="w-full lg:w-2/5 flex justify-center lg:justify-end"
           >
-            <div className="relative w-60 sm:w-72 aspect-9/16 group cursor-pointer" onClick={togglePlay}>
+            <div
+              className="relative w-60 sm:w-72 aspect-9/16 group cursor-pointer"
+              onClick={togglePlay}
+            >
               <div className="absolute inset-0 bg-linear-to-br from-[#A3B18A]/30 via-[#588157]/20 to-[#3A5A40]/30 rounded-3xl blur-xl scale-105"></div>
-              
+
               <div className="absolute -top-2 -left-2 w-8 h-8 border-t-4 border-l-4 border-[#A3B18A] rounded-tl-2xl z-10"></div>
               <div className="absolute -top-2 -right-2 w-8 h-8 border-t-4 border-r-4 border-[#A3B18A] rounded-tr-2xl z-10"></div>
               <div className="absolute -bottom-2 -left-2 w-8 h-8 border-b-4 border-l-4 border-[#A3B18A] rounded-bl-2xl z-10"></div>
@@ -444,127 +462,153 @@ const RestoSection = () => {
 
               <div className="relative bg-linear-to-br from-[#2F3E2E] via-[#1A231A] to-[#0F150F] rounded-3xl overflow-hidden shadow-2xl border border-[#A3B18A]/30">
                 <div className="relative m-3 rounded-2xl overflow-hidden">
-                  <video 
+                  <video
                     ref={videoRef}
                     src="/videos/video-resto.mp4"
-                    autoPlay 
-                    loop 
+                    autoPlay
+                    loop
+                    muted
                     playsInline
-                    onPlay={() => setIsPlaying(true)} 
+                    onPlay={() => setIsPlaying(true)}
                     onPause={() => setIsPlaying(false)}
                     className="object-cover w-full h-full opacity-95"
-                  />
-                  
+                  >
+                    <track kind="captions" srcLang="id" label="Indonesia" />
+                  </video>
+
                   <div className="absolute inset-0 shadow-[inset_0_0_60px_rgba(0,0,0,0.3)] pointer-events-none"></div>
                 </div>
-                
+
                 {!isPlaying && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm transition-all z-20">
                     <div className="relative">
                       <div className="absolute inset-0 w-20 h-20 -translate-x-3 -translate-y-3 bg-[#A3B18A]/20 rounded-full animate-ping"></div>
-                      
-                      <button className="relative w-14 h-14 bg-linear-to-br from-[#A3B18A] to-[#588157] rounded-full flex items-center justify-center pl-1 text-white hover:scale-110 hover:shadow-2xl hover:shadow-[#A3B18A]/50 transition-all duration-300 border-2 border-white/20">
+
+                      <button
+                        className="relative w-14 h-14 bg-linear-to-br from-[#A3B18A] to-[#588157] rounded-full flex items-center justify-center pl-1 text-white hover:scale-110 hover:shadow-2xl hover:shadow-[#A3B18A]/50 transition-all duration-300 border-2 border-white/20"
+                        aria-label="Play Video"
+                      >
                         <Play fill="currentColor" size={22} />
                       </button>
                     </div>
                   </div>
                 )}
-                
+
                 <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-black/90 via-black/50 to-transparent pointer-events-none z-10">
                   <div className="absolute bottom-0 left-0 right-0 p-5">
                     <div className="w-12 h-0.5 bg-linear-to-r from-[#A3B18A] to-transparent mb-3"></div>
-                    
-                    <p className="text-xs font-bold tracking-[0.2em] uppercase text-white/90 mb-1">Event & Gathering</p>
-                    <p className="text-[10px] tracking-wider uppercase text-[#A3B18A]/80 font-medium">Luxury Experience</p>
+
+                    <p className="text-xs font-bold tracking-[0.2em] uppercase text-white/90 mb-1">
+                      Event & Gathering
+                    </p>
+                    <p className="text-[10px] tracking-wider uppercase text-[#A3B18A]/80 font-medium">
+                      Luxury Experience
+                    </p>
                   </div>
                 </div>
-                
+
                 <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-linear-to-r from-transparent via-white/10 to-transparent pointer-events-none z-30 skew-x-12"></div>
               </div>
             </div>
           </motion.div>
-          
         </div>
 
         <div className="relative border-t border-[#E5E7E1]/10 pt-12">
-            <div className="flex justify-between items-end mb-8">
-                <div>
-                    <strong><p className="text-[#D4AF37] text-sm mb-2">* Minimum Order 15 Pax</p></strong>
-                    <h3 className="text-2xl sm:text-3xl font-serif text-[#E5E7E1]">Pilihan Paket Menu</h3>
-                    <p className="text-[#A3B18A] text-sm mt-2">Geser untuk melihat menu lainnya</p>
-                </div>
-                <div className="flex gap-2">
-                    <button onClick={prevSlide} className="p-3 border border-[#A3B18A]/50 rounded-full hover:bg-[#A3B18A] hover:text-[#2F3E2E] transition-colors">
-                        <ChevronLeft size={20} />
-                    </button>
-                    <button onClick={nextSlide} className="p-3 border border-[#A3B18A]/50 rounded-full hover:bg-[#A3B18A] hover:text-[#2F3E2E] transition-colors">
-                        <ChevronRight size={20} />
-                    </button>
-                </div>
+          <div className="flex justify-between items-end mb-8">
+            <div>
+              <strong>
+                <p className="text-[#D4AF37] text-sm mb-2">
+                  * Minimum Order 15 Pax
+                </p>
+              </strong>
+              <h3 className="text-2xl sm:text-3xl font-serif text-[#E5E7E1]">
+                Pilihan Paket Menu
+              </h3>
+              <p className="text-[#A3B18A] text-sm mt-2">
+                Geser untuk melihat menu lainnya
+              </p>
             </div>
+            <div className="flex gap-2">
+              <button
+                onClick={prevSlide}
+                className="p-3 border border-[#A3B18A]/50 rounded-full hover:bg-[#A3B18A] hover:text-[#2F3E2E] transition-colors"
+                aria-label="Previous Slide"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="p-3 border border-[#A3B18A]/50 rounded-full hover:bg-[#A3B18A] hover:text-[#2F3E2E] transition-colors"
+                aria-label="Next Slide"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+          </div>
 
-            <div className="overflow-hidden -mx-4 px-4 py-4">
-                <motion.div 
-                    className="flex gap-6"
-                    animate={{ x: `-${currentIndex * (100 / itemsPerPage)}%` }}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          <div className="overflow-hidden -mx-4 px-4 py-4">
+            <motion.div
+              className="flex gap-6"
+              animate={{ x: `-${currentIndex * (100 / itemsPerPage)}%` }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            >
+              {restoPackages.map((paket) => (
+                <motion.div
+                  key={paket.id}
+                  className={`shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]`}
                 >
-                    {restoPackages.map((paket) => (
-                        <motion.div 
-                            key={paket.id}
-                            className={`shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]`}
-                        >
-                            {/* --- NEW CARD DESIGN LIKE REFERENCE --- */}
-                            <div className="relative h-full rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-500 shadow-2xl bg-[#1A231A] border border-[#A3B18A]/20">
-                                
-                                {/* 1. Image Area (Top) */}
-                                <div className="relative h-48 sm:h-52 w-full">
-                                    <Image
-                                        src={paket.image}
-                                        alt={paket.name}
-                                        fill
-                                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                    />
-                                    {/* Gradient Overlay for Text Visibility */}
-                                    <div className="absolute inset-0 bg-linear-to-t from-[#1A231A] via-[#1A231A]/30 to-transparent"></div>
-                                    
-                                    {/* Title & Price overlay on Image (Bottom Left) */}
-                                    <div className="absolute bottom-4 left-6 z-10">
-                                        <h4 className="font-serif text-2xl sm:text-3xl text-[#E5E7E1] drop-shadow-md mb-1">{paket.name}</h4>
-                                        <p className="text-[#A3B18A] font-bold text-sm sm:text-base tracking-wide drop-shadow-md">{paket.price}</p>
-                                    </div>
-                                </div>
+                  <div className="relative h-full rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-500 shadow-2xl bg-[#1A231A] border border-[#A3B18A]/20">
+                    <div className="relative h-48 sm:h-52 w-full">
+                      <Image
+                        src={paket.image}
+                        alt={paket.name}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-linear-to-t from-[#1A231A] via-[#1A231A]/30 to-transparent"></div>
 
-                                {/* 2. Content Area (Bottom) */}
-                                <div className="p-6 flex flex-col h-[calc(100%-12rem)] sm:h-[calc(100%-13rem)]">
-                                    
-                                    {/* Menu List - 2 Columns */}
-                                    <div className="grow mb-8">
-                                        <ul className="grid grid-cols-2 gap-x-4 gap-y-3">
-                                            {paket.menu.map((menuItem, idx) => (
-                                                <li key={idx} className="flex items-start gap-2 text-[#E5E7E1]/80 text-[11px] sm:text-xs font-light group/item">
-                                                     <span className="mt-1.5 w-1 h-1 rounded-full bg-[#A3B18A] shrink-0"></span>
-                                                    <span>{menuItem}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
+                      <div className="absolute bottom-4 left-6 z-10">
+                        <h4 className="font-serif text-2xl sm:text-3xl text-[#E5E7E1] drop-shadow-md mb-1">
+                          {paket.name}
+                        </h4>
+                        <p className="text-[#A3B18A] font-bold text-sm sm:text-base tracking-wide drop-shadow-md">
+                          {paket.price}
+                        </p>
+                      </div>
+                    </div>
 
-                                    <Link 
-                                        href={`https://wa.me/6285801262682?text=Halo%20Joglo%20Dhepis,%20saya%20mau%20pesan%20${paket.name}`}
-                                        target="_blank"
-                                        className="w-full py-3 border border-[#E5E7E1]/30 text-[#E5E7E1] text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] rounded-full text-center hover:bg-[#A3B18A] hover:text-[#1A231A] hover:border-[#A3B18A] transition-all duration-300 flex items-center justify-center gap-2 group/btn"
-                                    >
-                                        View & Order
-                                    </Link>
-                                </div>
-                            </div>
-                        </motion.div>
-                    ))}
+                    <div className="p-6 flex flex-col h-[calc(100%-12rem)] sm:h-[calc(100%-13rem)]">
+                      <div className="grow mb-8">
+                        <ul className="grid grid-cols-2 gap-x-4 gap-y-3">
+                          {paket.menu.map((menuItem, idx) => (
+                            <li
+                              key={idx}
+                              className="flex items-start gap-2 text-[#E5E7E1]/80 text-[11px] sm:text-xs font-light group/item"
+                            >
+                              <span className="mt-1.5 w-1 h-1 rounded-full bg-[#A3B18A] shrink-0"></span>
+                              <span>{menuItem}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <Link
+                        href={`https://wa.me/6285801262682?text=Halo%20Joglo%20Dhepis,%20saya%20mau%20pesan%20${paket.name}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-3 border border-[#E5E7E1]/30 text-[#E5E7E1] text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] rounded-full text-center hover:bg-[#A3B18A] hover:text-[#1A231A] hover:border-[#A3B18A] transition-all duration-300 flex items-center justify-center gap-2 group/btn"
+                        aria-label={`Pesan ${paket.name} via WhatsApp`}
+                      >
+                        View & Order
+                      </Link>
+                    </div>
+                  </div>
                 </motion.div>
-            </div>
+              ))}
+            </motion.div>
+          </div>
         </div>
-
       </div>
     </section>
   );
@@ -596,7 +640,9 @@ export default function HomeView() {
             className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold text-[#E5E7E1] leading-[1.1] mb-4 sm:mb-6 drop-shadow-2xl font-serif tracking-tight"
           >
             PAKET WISATA <br />
-            <span className="italic text-[#A3B18A] font-light">BOROBUDUR</span>{" "}
+            <span className="italic text-[#A3B18A] font-light">
+              BOROBUDUR
+            </span>{" "}
             TERBAIK
           </motion.h1>
 
@@ -620,12 +666,16 @@ export default function HomeView() {
             <Link
               href="#vw"
               className="px-8 sm:px-10 py-3.5 sm:py-4 bg-[#E5E7E1]/10 backdrop-blur-sm border-2 border-[#E5E7E1]/50 text-[#E5E7E1] font-bold rounded-full hover:bg-[#E5E7E1] hover:text-[#2F3E2E] hover:border-[#E5E7E1] transition-all flex items-center justify-center gap-3 uppercase tracking-[0.15em] text-xs hover:scale-105 active:scale-100 duration-300 min-h-11"
+              aria-label="Lihat Pilihan Paket Wisata"
             >
               Lihat Paket
             </Link>
             <Link
               href="https://wa.me/6285801262682?text=Halo%20Explore%20Borobudur,%20saya%20tertarik%20dengan%20paket%20wisata%20anda"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-8 sm:px-10 py-3.5 sm:py-4 bg-[#4A5D44] text-white font-bold rounded-full hover:bg-[#3A4A35] transition-all flex items-center justify-center uppercase tracking-[0.15em] text-xs shadow-xl hover:shadow-[#A3B18A]/30 hover:scale-105 active:scale-100 duration-300 min-h-11"
+              aria-label="Booking Paket Wisata via WhatsApp"
             >
               Booking WhatsApp
             </Link>
@@ -700,6 +750,7 @@ export default function HomeView() {
                 <Link
                   href="/gallery"
                   className="inline-flex items-center gap-3 px-6 sm:px-8 py-2.5 sm:py-3 border-b-2 border-[#2F3E2E]/30 text-[#2F3E2E] text-xs font-bold tracking-[0.25em] uppercase hover:text-[#4A5D44] hover:border-[#4A5D44] transition-all group min-h-11"
+                  aria-label="Lihat Gallery Wisata"
                 >
                   Lihat Gallery Wisata{" "}
                   <ArrowRight
@@ -851,7 +902,10 @@ export default function HomeView() {
           <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
             <Link
               href="https://wa.me/6285801262682?text=Halo%20Admin,%20mau%20tanya%20paket%20wisata%20borobudur"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-10 sm:px-12 py-3.5 sm:py-4 bg-[#E5E7E1] text-[#2F3E2E] text-xs font-bold rounded-full tracking-[0.25em] uppercase hover:bg-white transition-all hover:scale-105 active:scale-100 shadow-2xl hover:shadow-[#E5E7E1]/20 min-h-11 flex items-center justify-center"
+              aria-label="Hubungi Admin via WhatsApp"
             >
               Hubungi Kami Sekarang
             </Link>
