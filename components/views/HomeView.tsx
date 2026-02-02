@@ -11,10 +11,21 @@ import {
   Droplets,
   Mountain,
   Play,
+  Utensils,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
-import { JSX } from "react";
+import { JSX, useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import VideoCarousel from "@/components/VideoCarousel";
+
+interface RestoPackage {
+  id: number;
+  name: string;
+  price: string;
+  menu: string[];
+  image: string;
+}
 
 interface FeatureData {
   id: string;
@@ -28,6 +39,126 @@ interface FeatureData {
   details: string[];
 }
 
+const restoPackages: RestoPackage[] = [
+  {
+    id: 1,
+    name: "Paket 1",
+    price: "IDR 30.000 / pax",
+    image: "/images/buffet.webp",
+    menu: [
+      "Nasi Putih",
+      "Pecel Sayur",
+      "Telur Dadar",
+      "Mie Goreng",
+      "Tempe Tepung",
+      "Kerupuk",
+      "Buah",
+      "Teh",
+    ],
+  },
+  {
+    id: 2,
+    name: "Paket 2",
+    price: "IDR 35.000 / pax",
+    image: "/images/buffet.webp",
+    menu: [
+      "Nasi Putih",
+      "Sup Bakso",
+      "Ayam Goreng",
+      "Tahu Goreng",
+      "Sambal",
+      "Kerupuk",
+      "Buah",
+      "Teh",
+    ],
+  },
+  {
+    id: 3,
+    name: "Paket 3",
+    price: "IDR 40.000 / pax",
+    image: "/images/buffet.webp", 
+    menu: [
+      "Nasi Putih",
+      "Sayur Lodeh",
+      "Lele / Ayam",
+      "Bihun Goreng",
+      "Bakwan",
+      "Krupuk",
+      "Buah",
+      "Teh",
+    ],
+  },
+  {
+    id: 4,
+    name: "Paket 4",
+    price: "IDR 40.000 / pax",
+    image: "/images/buffet.webp",
+    menu: [
+      "Nasi Putih",
+      "Soto Betawi",
+      "Bergedel",
+      "Kerupuk",
+      "Buah",
+      "Teh",
+      "Kopi",
+    ],
+  },
+  {
+    id: 5,
+    name: "Paket 5",
+    price: "IDR 45.000 / pax",
+    image: "/images/buffet.webp",
+    menu: [
+      "Nasi Putih",
+      "Ayam Bakar",
+      "Oseng Buncis",
+      "Mie Lethek",
+      "Tempe Goreng",
+      "Krupuk",
+      "Sambal",
+      "Buah",
+      "Teh",
+      "Kopi",
+    ],
+  },
+  {
+    id: 6,
+    name: "Paket 6",
+    price: "IDR 50.000 / pax",
+    image: "/images/buffet.webp",
+    menu: [
+      "Nasi Putih",
+      "Nila Bakar",
+      "Ca Sayur Bakso",
+      "Mie Lethek",
+      "Tahu/Tempe",
+      "Krupuk",
+      "Sambal",
+      "Buah",
+      "Teh",
+      "Kopi",
+    ],
+  },
+  {
+    id: 7,
+    name: "Paket 7",
+    price: "IDR 55.000 / pax",
+    image: "/images/buffet.webp",
+    menu: [
+      "Nasi Putih",
+      "Sup Iga Sapi",
+      "Mie Goreng",
+      "Bergedel",
+      "Tempe Goreng",
+      "Krupuk",
+      "Buah",
+      "Sambel",
+      "Teh",
+      "Kopi",
+    ],
+  },
+];
+
 const featuresData: FeatureData[] = [
   {
     id: "vw",
@@ -35,7 +166,7 @@ const featuresData: FeatureData[] = [
     subtitle: "WISATA HITS MAGELANG",
     description:
       "Paket wisata terpopuler berkeliling desa wisata Borobudur menggunakan mobil VW klasik. Kunjungi sentra UMKM Rengginang, Madu, Batik, dan berfoto dengan latar Pegunungan Menoreh yang instagramable.",
-    image: "/images/vw-main.jpg",
+    image: "/images/vw-main11.jpg",
     stats: ["Mobil Klasik", "Edukasi UMKM", "Spot Instagramable"],
     icon: <Camera className="w-6 h-6 text-[#E8ECE9]" />,
     color: "bg-[#4A5D44]",
@@ -203,6 +334,237 @@ const FeatureItem = ({ item, index }: { item: FeatureData; index: number }) => {
             </Link>
           </div>
         </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const RestoSection = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prev) =>
+      prev + 1 > restoPackages.length - itemsPerPage ? 0 : prev + 1
+    );
+  }, [itemsPerPage]);
+
+  const prevSlide = useCallback(() => {
+    setCurrentIndex((prev) =>
+      prev - 1 < 0 ? restoPackages.length - itemsPerPage : prev - 1
+    );
+  }, [itemsPerPage]);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+    }
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) setItemsPerPage(1);
+      else if (window.innerWidth < 1024) setItemsPerPage(2);
+      else setItemsPerPage(3);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [nextSlide]);
+
+  return (
+    <section className="py-20 md:py-32 bg-[#2F3E2E] text-[#E5E7E1] relative overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center mb-16 lg:mb-24">
+          
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="w-full lg:w-3/5"
+          >
+             <div className="flex items-center gap-3 mb-6">
+                <div className="p-2 bg-[#A3B18A] rounded-full text-[#2F3E2E]">
+                    <Utensils size={20} />
+                </div>
+                <h3 className="text-[#A3B18A] font-bold text-xs tracking-[0.3em] uppercase">
+                    Joglo Dhepis Resto
+                </h3>
+            </div>
+            
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif mb-6 leading-tight">
+              Cita Rasa Lezat <br/>
+              <span className="text-[#A3B18A] italic">Harga Bersahabat</span>
+            </h2>
+
+            <p className="text-[#E5E7E1]/80 text-base md:text-lg leading-relaxed mb-8 font-light">
+              Lengkapi wisata Anda dengan hidangan lezat di Joglo Dhepis. Kami melayani 
+              pemesanan rombongan, prasmanan, reuni, hingga acara gathering kantor
+              dengan kapasitas luas dan suasana Joglo yang asri.
+            </p>
+
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {["Kapasitas 50+ Pax", "Karaoke", "Proyektor", "Sound System"].map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-3">
+                         <div className="w-1.5 h-1.5 rounded-full bg-[#A3B18A]"></div>
+                         <span className="text-sm font-medium tracking-wide">{item}</span>
+                    </li>
+                ))}
+            </ul>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="w-full lg:w-2/5 flex justify-center lg:justify-end"
+          >
+            <div className="relative w-60 sm:w-72 aspect-9/16 group cursor-pointer" onClick={togglePlay}>
+              <div className="absolute inset-0 bg-linear-to-br from-[#A3B18A]/30 via-[#588157]/20 to-[#3A5A40]/30 rounded-3xl blur-xl scale-105"></div>
+              
+              <div className="absolute -top-2 -left-2 w-8 h-8 border-t-4 border-l-4 border-[#A3B18A] rounded-tl-2xl z-10"></div>
+              <div className="absolute -top-2 -right-2 w-8 h-8 border-t-4 border-r-4 border-[#A3B18A] rounded-tr-2xl z-10"></div>
+              <div className="absolute -bottom-2 -left-2 w-8 h-8 border-b-4 border-l-4 border-[#A3B18A] rounded-bl-2xl z-10"></div>
+              <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b-4 border-r-4 border-[#A3B18A] rounded-br-2xl z-10"></div>
+
+              <div className="relative bg-linear-to-br from-[#2F3E2E] via-[#1A231A] to-[#0F150F] rounded-3xl overflow-hidden shadow-2xl border border-[#A3B18A]/30">
+                <div className="relative m-3 rounded-2xl overflow-hidden">
+                  <video 
+                    ref={videoRef}
+                    src="/videos/video-resto.mp4"
+                    autoPlay 
+                    loop 
+                    playsInline
+                    onPlay={() => setIsPlaying(true)} 
+                    onPause={() => setIsPlaying(false)}
+                    className="object-cover w-full h-full opacity-95"
+                  />
+                  
+                  <div className="absolute inset-0 shadow-[inset_0_0_60px_rgba(0,0,0,0.3)] pointer-events-none"></div>
+                </div>
+                
+                {!isPlaying && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm transition-all z-20">
+                    <div className="relative">
+                      <div className="absolute inset-0 w-20 h-20 -translate-x-3 -translate-y-3 bg-[#A3B18A]/20 rounded-full animate-ping"></div>
+                      
+                      <button className="relative w-14 h-14 bg-linear-to-br from-[#A3B18A] to-[#588157] rounded-full flex items-center justify-center pl-1 text-white hover:scale-110 hover:shadow-2xl hover:shadow-[#A3B18A]/50 transition-all duration-300 border-2 border-white/20">
+                        <Play fill="currentColor" size={22} />
+                      </button>
+                    </div>
+                  </div>
+                )}
+                
+                <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-black/90 via-black/50 to-transparent pointer-events-none z-10">
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <div className="w-12 h-0.5 bg-linear-to-r from-[#A3B18A] to-transparent mb-3"></div>
+                    
+                    <p className="text-xs font-bold tracking-[0.2em] uppercase text-white/90 mb-1">Event & Gathering</p>
+                    <p className="text-[10px] tracking-wider uppercase text-[#A3B18A]/80 font-medium">Luxury Experience</p>
+                  </div>
+                </div>
+                
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-linear-to-r from-transparent via-white/10 to-transparent pointer-events-none z-30 skew-x-12"></div>
+              </div>
+            </div>
+          </motion.div>
+          
+        </div>
+
+        <div className="relative border-t border-[#E5E7E1]/10 pt-12">
+            <div className="flex justify-between items-end mb-8">
+                <div>
+                    <strong><p className="text-[#D4AF37] text-sm mb-2">* Minimum Order 15 Pax</p></strong>
+                    <h3 className="text-2xl sm:text-3xl font-serif text-[#E5E7E1]">Pilihan Paket Menu</h3>
+                    <p className="text-[#A3B18A] text-sm mt-2">Geser untuk melihat menu lainnya</p>
+                </div>
+                <div className="flex gap-2">
+                    <button onClick={prevSlide} className="p-3 border border-[#A3B18A]/50 rounded-full hover:bg-[#A3B18A] hover:text-[#2F3E2E] transition-colors">
+                        <ChevronLeft size={20} />
+                    </button>
+                    <button onClick={nextSlide} className="p-3 border border-[#A3B18A]/50 rounded-full hover:bg-[#A3B18A] hover:text-[#2F3E2E] transition-colors">
+                        <ChevronRight size={20} />
+                    </button>
+                </div>
+            </div>
+
+            <div className="overflow-hidden -mx-4 px-4 py-4">
+                <motion.div 
+                    className="flex gap-6"
+                    animate={{ x: `-${currentIndex * (100 / itemsPerPage)}%` }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                >
+                    {restoPackages.map((paket) => (
+                        <motion.div 
+                            key={paket.id}
+                            className={`shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]`}
+                        >
+                            {/* --- NEW CARD DESIGN LIKE REFERENCE --- */}
+                            <div className="relative h-full rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-500 shadow-2xl bg-[#1A231A] border border-[#A3B18A]/20">
+                                
+                                {/* 1. Image Area (Top) */}
+                                <div className="relative h-48 sm:h-52 w-full">
+                                    <Image
+                                        src={paket.image}
+                                        alt={paket.name}
+                                        fill
+                                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                    />
+                                    {/* Gradient Overlay for Text Visibility */}
+                                    <div className="absolute inset-0 bg-linear-to-t from-[#1A231A] via-[#1A231A]/30 to-transparent"></div>
+                                    
+                                    {/* Title & Price overlay on Image (Bottom Left) */}
+                                    <div className="absolute bottom-4 left-6 z-10">
+                                        <h4 className="font-serif text-2xl sm:text-3xl text-[#E5E7E1] drop-shadow-md mb-1">{paket.name}</h4>
+                                        <p className="text-[#A3B18A] font-bold text-sm sm:text-base tracking-wide drop-shadow-md">{paket.price}</p>
+                                    </div>
+                                </div>
+
+                                {/* 2. Content Area (Bottom) */}
+                                <div className="p-6 flex flex-col h-[calc(100%-12rem)] sm:h-[calc(100%-13rem)]">
+                                    
+                                    {/* Menu List - 2 Columns */}
+                                    <div className="grow mb-8">
+                                        <ul className="grid grid-cols-2 gap-x-4 gap-y-3">
+                                            {paket.menu.map((menuItem, idx) => (
+                                                <li key={idx} className="flex items-start gap-2 text-[#E5E7E1]/80 text-[11px] sm:text-xs font-light group/item">
+                                                     <span className="mt-1.5 w-1 h-1 rounded-full bg-[#A3B18A] shrink-0"></span>
+                                                    <span>{menuItem}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+
+                                    <Link 
+                                        href={`https://wa.me/6285801262682?text=Halo%20Joglo%20Dhepis,%20saya%20mau%20pesan%20${paket.name}`}
+                                        target="_blank"
+                                        className="w-full py-3 border border-[#E5E7E1]/30 text-[#E5E7E1] text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] rounded-full text-center hover:bg-[#A3B18A] hover:text-[#1A231A] hover:border-[#A3B18A] transition-all duration-300 flex items-center justify-center gap-2 group/btn"
+                                    >
+                                        View & Order
+                                    </Link>
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
+                </motion.div>
+            </div>
+        </div>
+
       </div>
     </section>
   );
@@ -449,6 +811,8 @@ export default function HomeView() {
           ))}
         </div>
       </div>
+
+      <RestoSection />
 
       <section className="relative py-24 sm:py-32 md:py-40 px-4 sm:px-6 bg-[#2F3E2E] overflow-hidden flex items-center justify-center">
         <div className="absolute inset-0 opacity-30">
