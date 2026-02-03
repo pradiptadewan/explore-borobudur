@@ -467,7 +467,6 @@ const RestoSection = () => {
                     src="/videos/video-resto.mp4"
                     autoPlay
                     loop
-                    muted
                     playsInline
                     onPlay={() => setIsPlaying(true)}
                     onPause={() => setIsPlaying(false)}
