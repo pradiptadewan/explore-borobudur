@@ -620,10 +620,10 @@ export default function HomeView() {
         <div className="absolute inset-0 w-full h-full">
           <Image
             src="/images/candi22.jpg"
-            alt="Wisata Candi Borobudur dan Sewa VW Safari Magelang"
+            alt="Wisata Candi Borobudur..."
             fill
-            sizes="(max-width: 768px) 100vh, 100vw"
-            className="object-cover object-center md:object-[center_30%] scale-100 md:scale-110"
+            sizes="(max-width: 640px) 100vh, 100vw"
+            className="object-cover..."
             priority
             quality={80}
           />
