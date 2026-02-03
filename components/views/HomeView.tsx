@@ -622,10 +622,10 @@ export default function HomeView() {
             src="/images/candi22.jpg"
             alt="Wisata Candi Borobudur dan Sewa VW Safari Magelang"
             fill
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vh, 100vw"
             className="object-cover object-center md:object-[center_30%] scale-100 md:scale-110"
             priority
-            quality={90}
+            quality={80}
           />
           <div className="absolute inset-0 bg-black/30"></div>
           <div className="absolute inset-0 bg-linear-to-b from-[#2F3E2E]/40 via-[#2F3E2E]/20 to-[#4A5D44]"></div>
